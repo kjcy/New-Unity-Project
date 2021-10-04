@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     public void Update()
     {
-        //github 실험중
+        //github 실험중2
     }
 
     //private void OnCollisionEnter2D(Collision2D collision)
