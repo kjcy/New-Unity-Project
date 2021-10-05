@@ -74,7 +74,7 @@ public class PlayerManager : MonoBehaviour
     private void UpdateUi()
     {
         hpText.text = "hp :" + hp;
-        abilityBarText.text = "ability : " + abilityBar;
+        abilityBarText.text = "ability : " +Mathf.Round( abilityBar*10)*0.1;
     }
 
     private bool RaycastHit(bool foothold = true)
