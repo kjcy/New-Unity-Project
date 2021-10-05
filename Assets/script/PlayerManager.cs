@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour
 {
     public GameManager gameManager;
 
+    
 
     [SerializeField]
     private GameObject player;
@@ -79,7 +80,9 @@ public class PlayerManager : MonoBehaviour
 
     private bool RaycastHit(bool foothold = true)
     {
-        RaycastHit2D hit = Physics2D.Raycast(new Vector2( player.gameObject.transform.position.x, player.gameObject.transform.position.y-0.7f), Vector2.down, 0.1f);
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2( player.gameObject.transform.position.x,
+                                                player.gameObject.transform.position.y-0.5f),
+                                                 Vector2.down, 0.1f);
         if(hit.collider != null) {
             if (foothold) { 
                 if(hit.transform.CompareTag("floor")|| hit.transform.CompareTag("foothold"))
@@ -228,9 +231,9 @@ public class PlayerManager : MonoBehaviour
         }
         if (inputbullet&&attackTime<0)
         {
-            attackTime = 0.75f;
+            attackTime = 0.35f;
             GameObject bullettemp = Instantiate(bullet, player.transform.position, v);
-          
+            bullettemp.GetComponent<bullet>().damge = 2;
         }
 
         

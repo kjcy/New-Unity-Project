@@ -23,15 +23,15 @@ public class Enemy : MonoBehaviour
         hp -= damage;//체력 감소
         if (hp < 1)
         {
-            DestroyObject();
+            DestroyObject(hit);
         }
 
     }
 
     //적 오브젝트 삭제
-    public void DestroyObject()
+    public void DestroyObject(GameObject gameObject)
     {
-        DestroyImmediate(this.gameObject);
+        Destroy(gameObject);
     }
 
     //직선으로 이동

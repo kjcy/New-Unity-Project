@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+
+
+
     [SerializeField]
     private EnemyManager enemyManager;
+
+    [SerializeField]
+    public GameObject bossPripab;
+
     [SerializeField]
     private PlayerManager playerManager;
 
@@ -19,7 +26,10 @@ public class GameManager : MonoBehaviour
     }
 
 
-
+    public void EnemyHpDown(Enemy enemy ,int damge)
+    {
+        enemy.Hpdonw(damge,null);
+    }
 
 
     public void PlayerParringCheck()

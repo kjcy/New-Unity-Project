@@ -8,6 +8,7 @@ TagManager:
   - foothold
   - barrage
   - parringbarrage
+  - boss
   layers:
   - Default
   - TransparentFX
