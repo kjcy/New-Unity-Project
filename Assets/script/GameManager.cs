@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
         if (playerManager.hpDown(1))
         {
             //게임 오버
+            play = false;
         }
     }
 }

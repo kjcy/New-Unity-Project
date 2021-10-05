@@ -32,6 +32,8 @@ public class PlayerManager : MonoBehaviour
 
     private float attackTime;
 
+    private float invincibilityTime;
+
     private float speed;
     private int hp;
     [SerializeField]
@@ -60,15 +62,18 @@ public class PlayerManager : MonoBehaviour
         attackTime = 0.75f;
         hp = 5;
         abilityBar = 0;
+        invincibilityTime = 1.5f;
     }
 
     private void Update()
     {
+        if (gameManager.play) { 
+        invincibilityTime -= Time.deltaTime;
         PlayerParring();
         PlayerMove();
         PlayerDown();
         ShotBullet();
-       
+        }
         UpdateUi();
     }
 
@@ -280,16 +285,19 @@ public class PlayerManager : MonoBehaviour
     //GameManager에서 호출하며 플레이어의 체력을 감소, 체력이 0이하가 된다면 GameManager 에서 게임 오버를 출력한다.
     public bool hpDown(int damage)
     {
-        hp -= damage;
-
-        if (hp < 1)
-        {
-            return true;
+        if (invincibilityTime < 0) { 
+             hp -= damage;
+            invincibilityTime = 1.5f;
+            if (hp < 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     

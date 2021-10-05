@@ -46,6 +46,17 @@ public class Player : MonoBehaviour
             manager.gameManager.PlayerParringCheck();
             Destroy(collision.gameObject);
         }
+
+       
+
     }
 
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("boss"))
+        {
+            manager.gameManager.PlayerHpDown();
+        }
+    }
 }
