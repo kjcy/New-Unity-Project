@@ -8,7 +8,7 @@ public class boss : Enemy
     void Start()
     {
         enemyType = type.boss;
-        hp = 100;
+        hp = 300;
     }
 
     // Update is called once per frame
