@@ -11,6 +11,9 @@ public class EnemyManager : MonoBehaviour
 
     public GameObject mainBoss;
 
+    private float pattentime;
+
+
     [SerializeField]
     private GameObject[] barragebox = new GameObject[5];
 
@@ -20,14 +23,28 @@ public class EnemyManager : MonoBehaviour
 
         mainBoss = Instantiate(gameManager.bossPripab, new Vector3(8, -2, 0), Quaternion.identity);
         mainBoss.GetComponent<boss>().enemyManager = this;
-        StartCoroutine(pattenCor());
+    //    StartCoroutine(pattenCor());
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+         if(gameManager.play) { 
+                pattentime += Time.deltaTime;
+            if(Mathf.Round( pattentime) % 120 == 0)
+            {
+                if (mainBoss.transform.position.y < 0) { 
+                mainBoss.GetComponent<Enemy>().MoveEnemy(new Vector3(8, 2.5f, 0), 300);
+                }
+                else
+                {
+                    mainBoss.GetComponent<Enemy>().MoveEnemy(new Vector3(8, 2.5f, 0), 300);
+                }
+            }
+
+
+        }
     }
 
     public void BossDie()
@@ -41,35 +58,10 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator pattenCor()
     {
-        
-        
-        do
-        {
-            if (!gameManager.play) break;
 
-            if (mainBoss.transform.position.y < 0) { 
-            mainBoss.GetComponent<Enemy>().MoveEnemy(new Vector3(8, 2, 0), 300f);
-            }
-            else
-            {
-                mainBoss.GetComponent<Enemy>().MoveEnemy(new Vector3(8, -2, 0), 300f);
-            }
-            for (int i = 0; i < 4; i++)
-            {
-                temp[i] = Instantiate(barragebox[0], mainBoss.transform.position, Quaternion.identity, barrageParent);
-                temp[i].GetComponent<Enemy>().enemyManager = this;
-            }
-            temp[4] = Instantiate(barragebox[1], mainBoss.transform.position, Quaternion.identity, barrageParent);
-            temp[4].GetComponent<Enemy>().enemyManager = this;
 
-            for (int i = 0; i < 5; i++)
-            {
-                temp[i].GetComponent<Enemy>().MoveEnemy(new Vector3(-10, -3 + i * 1.35f, 0), 100f);
-                yield return new WaitForSeconds(0.57f);
-            }
 
-            yield return new WaitForSeconds(5f);
-        } while (gameManager.play);
+
 
         yield return 0;
     }

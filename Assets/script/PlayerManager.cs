@@ -68,7 +68,7 @@ public class PlayerManager : MonoBehaviour
         PlayerMove();
         PlayerDown();
         ShotBullet();
-        GetabilityBar();
+       
         UpdateUi();
     }
 
@@ -233,6 +233,7 @@ public class PlayerManager : MonoBehaviour
         {
             attackTime = 0.35f;
             GameObject bullettemp = Instantiate(bullet, player.transform.position, v);
+            bullettemp.GetComponent<bullet>().manager = this;
             bullettemp.GetComponent<bullet>().damge = 2;
         }
 
@@ -274,7 +275,7 @@ public class PlayerManager : MonoBehaviour
     //시간이 지날때마다 능력 게이지가 차오른다.
     public void GetabilityBar()
     {
-        abilityBar += 0.1f * Time.deltaTime;
+        abilityBar += 0.025f;
     }
     //GameManager에서 호출하며 플레이어의 체력을 감소, 체력이 0이하가 된다면 GameManager 에서 게임 오버를 출력한다.
     public bool hpDown(int damage)
