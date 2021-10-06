@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public GameManager gameManager;
+    public GameObject foothold;
     public Transform barrageParent;
 
     private GameObject[] temp = new GameObject[20];
@@ -32,29 +33,34 @@ public class EnemyManager : MonoBehaviour
     {
          if(gameManager.play) { 
                 pattentime += 1;
-            if(Mathf.Round( pattentime) % 500 == 0)
-            {
-                if (mainBoss.transform.position.y < 0) { 
-                mainBoss.GetComponent<Enemy>().MoveEnemy(new Vector3(8, 2.5f, 0), 300);
-                }
-                else
-                {
-                    mainBoss.GetComponent<Enemy>().MoveEnemy(new Vector3(8, -2.5f, 0), 300);
-                }
-            }
+            
 
-            if(mainBoss.GetComponent<Enemy>().hp<100 && pattentime % 1500 == 0)
+            if(mainBoss.GetComponent<Enemy>().hp<100)
             {
+                if (Mathf.Round(pattentime) % 500 == 0)
+                {
+                    if (mainBoss.transform.position.y < 0)
+                    {
+                        mainBoss.GetComponent<Enemy>().MoveEnemy(new Vector3(8, 2.5f, 0), 300);
+                    }
+                    else
+                    {
+                        mainBoss.GetComponent<Enemy>().MoveEnemy(new Vector3(8, -2.5f, 0), 300);
+                    }
+                }
+                if(Mathf.Round(pattentime)%600 == 0) { 
                 Debug.Log("패턴발사~~");
                 StartCoroutine(pattenCor2());
+                }
             }
-
-            if(Mathf.Round(pattentime) % 1200 == 0)
-            {
-                StartCoroutine(pattenCor());
-            }else if(Mathf.Round(pattentime) % 600 == 0)
-            {
-                StartCoroutine(pattenCor1());
+            else { 
+                if(pattentime % 1200 == 0)
+                {
+                    StartCoroutine(pattenCor());
+                }else if(pattentime % 600 == 0)
+                {
+                    StartCoroutine(pattenCor1());
+                }
             }
         }
     }
@@ -73,9 +79,9 @@ public class EnemyManager : MonoBehaviour
 
         for(int i = 0; i < 3; i++)
         {
-            temp[i] = Instantiate(barragebox[0], mainBoss.transform.position, Quaternion.identity, barrageParent);
-            temp[i].GetComponent<Enemy>().MoveEnemy(new Vector3(temp[i].transform.position.x - 20f, temp[i].transform.position.y, temp[i].transform.position.z), 100f);
-            yield return new WaitForSecondsRealtime(0.88f);
+            temp[i] = Instantiate(barragebox[0], mainBoss.transform.position - new Vector3(0,0.5f,0), Quaternion.identity, barrageParent);
+            temp[i].GetComponent<Enemy>().MoveEnemy(new Vector3(temp[i].transform.position.x - 20f, temp[i].transform.position.y-0.5f, temp[i].transform.position.z), 150f);
+            yield return new WaitForSecondsRealtime(1.22f);
         }
 
         
@@ -87,17 +93,19 @@ public class EnemyManager : MonoBehaviour
     {
         for(int i = 3; i < 7; i++)
         {
-            temp[i] = Instantiate(barragebox[0], mainBoss.transform.position, Quaternion.identity, barrageParent);
+            temp[i] = Instantiate(barragebox[0], mainBoss.transform.position - new Vector3(0, 0.5f, 0), Quaternion.identity, barrageParent);
             temp[i].GetComponent<Enemy>().MoveEnemy(new Vector3(temp[i].transform.position.x - 20f, temp[i].transform.position.y, temp[i].transform.position.z), 150f);
             yield return new WaitForSecondsRealtime(0.75f);
         }
-        temp[7] = Instantiate(barragebox[1], mainBoss.transform.position, Quaternion.identity, barrageParent);
+        temp[7] = Instantiate(barragebox[1], mainBoss.transform.position - new Vector3(0, 0.5f, 0), Quaternion.identity, barrageParent);
         temp[7].GetComponent<Enemy>().MoveEnemy(new Vector3(temp[7].transform.position.x - 20f, temp[7].transform.position.y, temp[7].transform.position.z), 150f);
        
     }
 
     IEnumerator pattenCor2()
     {
+        GameObject footholdTemp = Instantiate(foothold, new Vector3(-3, -1, 0), Quaternion.identity);
+
         for(int i = 8; i < 15; i++)
         {
             temp[i] = Instantiate(barragebox[i%2], mainBoss.transform.position + new Vector3(0, Random.Range(-1, 1), 0), Quaternion.identity, barrageParent);
@@ -109,6 +117,8 @@ public class EnemyManager : MonoBehaviour
             temp[i].GetComponent<Enemy>().MoveEnemy(new Vector3(temp[i].transform.position.x - 20f, temp[i].transform.position.y, temp[i].transform.position.z), 150f);
             yield return new WaitForSecondsRealtime(0.334f);
         }
+
+        Destroy(footholdTemp);
 
     }
 

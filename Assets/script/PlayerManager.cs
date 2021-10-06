@@ -239,7 +239,7 @@ public class PlayerManager : MonoBehaviour
             attackTime = 0.35f;
             GameObject bullettemp = Instantiate(bullet, player.transform.GetChild(0).position, v);
             bullettemp.GetComponent<bullet>().manager = this;
-            bullettemp.GetComponent<bullet>().damge = 2;
+            bullettemp.GetComponent<bullet>().damge = 5;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -257,7 +257,7 @@ public class PlayerManager : MonoBehaviour
 
     private void PlayerParring()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             //패링이 아닐때
             if (!parringPlayer)
@@ -329,7 +329,7 @@ public class PlayerManager : MonoBehaviour
         {
             GameObject bullettemp = Instantiate(bullet, player.transform.GetChild(0).position, v);
             bullettemp.GetComponent<bullet>().manager = this;
-            bullettemp.GetComponent<bullet>().damge = 2;
+            bullettemp.GetComponent<bullet>().damge = 3;
             yield return new WaitForSecondsRealtime(0.09f);
         }
 
