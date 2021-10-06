@@ -237,12 +237,19 @@ public class PlayerManager : MonoBehaviour
         if (inputbullet&&attackTime<0)
         {
             attackTime = 0.35f;
-            GameObject bullettemp = Instantiate(bullet, player.transform.position, v);
+            GameObject bullettemp = Instantiate(bullet, player.transform.GetChild(0).position, v);
             bullettemp.GetComponent<bullet>().manager = this;
             bullettemp.GetComponent<bullet>().damge = 2;
         }
 
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if(abilityBar > 1)
+            {
+                abilityBar -= Mathf.Floor(abilityBar);
+                abilityaction();
+            }
+        }
 
 
     }
@@ -273,14 +280,25 @@ public class PlayerManager : MonoBehaviour
     public void ParringSuccess()
     {
         Debug.Log("패링 성공");
-        if(abilityBar <4f)
+        if(abilityBar < 4f) { 
             abilityBar += 1;
+        }
+        else
+        {
+            abilityBar = 4;
+        }
     }
 
     //시간이 지날때마다 능력 게이지가 차오른다.
     public void GetabilityBar()
     {
+        if(abilityBar < 4f) { 
         abilityBar += 0.025f;
+        }
+        else
+        {
+            abilityBar = 4;
+        }
     }
     //GameManager에서 호출하며 플레이어의 체력을 감소, 체력이 0이하가 된다면 GameManager 에서 게임 오버를 출력한다.
     public bool hpDown(int damage)
@@ -300,8 +318,23 @@ public class PlayerManager : MonoBehaviour
         return false;
     }
 
-    
+    private void abilityaction()
+    {
+        StartCoroutine(Abilityaction());
+    }
+    IEnumerator Abilityaction()
+    {
+        Quaternion v = player.transform.GetChild(0).rotation;
+        for(int i = 0; i < 15; i++)
+        {
+            GameObject bullettemp = Instantiate(bullet, player.transform.GetChild(0).position, v);
+            bullettemp.GetComponent<bullet>().manager = this;
+            bullettemp.GetComponent<bullet>().damge = 2;
+            yield return new WaitForSecondsRealtime(0.09f);
+        }
 
+        yield return 0;
+    }
 
 
 }
