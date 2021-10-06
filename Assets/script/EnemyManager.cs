@@ -71,7 +71,7 @@ public class EnemyManager : MonoBehaviour
         {
             Destroy(barrageParent.GetChild(i).gameObject);
         }
-        gameManager.play = false;
+        gameManager.GameOver.Invoke();//게임이 끝났다는것을 알려준다.
     }
 
     IEnumerator pattenCor()

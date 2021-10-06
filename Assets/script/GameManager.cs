@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
 
-
+    public UnityEvent GameOver;
 
     [SerializeField]
     private EnemyManager enemyManager;
@@ -46,10 +46,18 @@ public class GameManager : MonoBehaviour
 
     public void PlayerHpDown()
     {
-        if (playerManager.hpDown(1))
+        if (playerManager.hpDown(1))//플레이어의 체력이 0이하가 된다면 참을 반환한다.
         {
-            //게임 오버
-            play = false;
+            GameOver.Invoke();//게임오버라는 이벤트를 실행
+            
         }
     }
+
+    public void GameEnd()
+    {
+        play = false;
+
+    }
+
+
 }

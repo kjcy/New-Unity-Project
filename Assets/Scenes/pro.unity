@@ -790,6 +790,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6066b32aa8142f4991ccf1d9a1e42e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameOver:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1009654490}
+        m_MethodName: GameEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   enemyManager: {fileID: 469968727}
   bossPripab: {fileID: 5240008348010360573, guid: 03b918ce8fb041840a3744a290822383,
     type: 3}
