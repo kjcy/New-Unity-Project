@@ -56,7 +56,22 @@ public class Enemy : MonoBehaviour
         yield return 0;
     }
 
-   
+    public void ScaleEnemy(Vector3 endScale , float time)
+    {
+        Vector3 startScale = this.transform.localScale;
+        StartCoroutine(ScaleEnemyCor( startScale, endScale, time));
+    }
+
+   IEnumerator ScaleEnemyCor(Vector3 startScale, Vector3 endScale, float time)
+    {
+        for(int i = 0; i <= time; i++)
+        {
+            this.gameObject.transform.localScale = Vector3.Lerp(startScale, endScale, i / time);
+            yield return new WaitForFixedUpdate();
+        }
+
+        yield return 0;
+    }
     
 
 

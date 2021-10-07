@@ -115,6 +115,7 @@ public class EnemyManager : MonoBehaviour
         for(int i = 8; i < 15; i++)
         {
             temp[i].GetComponent<Enemy>().MoveEnemy(new Vector3(temp[i].transform.position.x - 20f, temp[i].transform.position.y, temp[i].transform.position.z), 150f);
+            temp[i].GetComponent<Enemy>().ScaleEnemy(new Vector3(1.5f, 1.5f, 1), 150f);
             yield return new WaitForSecondsRealtime(0.334f);
         }
 
