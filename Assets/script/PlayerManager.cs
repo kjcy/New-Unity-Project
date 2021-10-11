@@ -17,12 +17,19 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
+    static public PlayerManager playerManager;
+
     public GameManager gameManager;
 
-    
+
 
     [SerializeField]
     private GameObject player;
+
+    public GameObject Player{
+        get { return player; }
+
+    }
 
     [SerializeField]
     private GameObject bullet;
@@ -54,6 +61,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
+        playerManager = this;
         speed = 7.5f;
         Debug.LogFormat("{0}", speed);
         downPlayer = true;

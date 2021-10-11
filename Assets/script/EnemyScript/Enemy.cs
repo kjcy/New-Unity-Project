@@ -62,17 +62,36 @@ public class Enemy : MonoBehaviour
         StartCoroutine(ScaleEnemyCor( startScale, endScale, time));
     }
 
+    public void TrackingPalyer(float time)
+    {
+        StartCoroutine(TrackingPlayerCor(this.transform.position, time));
+    }
+
    IEnumerator ScaleEnemyCor(Vector3 startScale, Vector3 endScale, float time)
     {
         for(int i = 0; i <= time; i++)
         {
-            this.gameObject.transform.localScale = Vector3.Lerp(startScale, endScale, i / time);
+            this.gameObject.transform.localScale = Vector3.Lerp(startScale, endScale, i / time);//직선 보간
             yield return new WaitForFixedUpdate();
         }
 
         yield return 0;
     }
-    
+
+
+    IEnumerator TrackingPlayerCor(Vector3 startPoint, float time)
+    {
+        Vector3 playerPoint = PlayerManager.playerManager.Player.transform.position;
+        for (int i = 1; i <= time; i++)
+        {
+            this.gameObject.transform.position = Vector3.Lerp(startPoint, playerPoint, i/time);//원형 보간
+            startPoint = this.gameObject.transform.localScale;
+            yield return new WaitForFixedUpdate();
+        }
+        
+
+        yield return 0;
+    }
 
 
 }

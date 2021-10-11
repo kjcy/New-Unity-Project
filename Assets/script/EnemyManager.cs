@@ -60,6 +60,10 @@ public class EnemyManager : MonoBehaviour
                 }else if(pattentime % 600 == 0)
                 {
                     StartCoroutine(pattenCor1());
+                }else if(pattentime % 1530 == 0)
+                {
+                    Debug.Log("테스트중");                 
+                    StartCoroutine(pattenTestCor());
                 }
             }
         }
@@ -123,5 +127,19 @@ public class EnemyManager : MonoBehaviour
 
     }
 
+
+    IEnumerator pattenTestCor()
+    {
+        temp[15] = Instantiate(barragebox[0], mainBoss.transform.position, Quaternion.identity, barrageParent);
+
+        temp[15].GetComponent<Enemy>().MoveEnemy(new Vector3(0, 2, 0), 100f);
+        yield return new WaitForSecondsRealtime(3f);
+        temp[15].GetComponent<Enemy>().TrackingPalyer(200f);
+
+        for(int i = 0; i <= 200; i++) { 
+        yield return new WaitForFixedUpdate();
+        }
+        Destroy(temp[15]);
+    }
 
 }
