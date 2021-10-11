@@ -34,6 +34,13 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+    /*
+     * 사용법
+     * 이동할 gameObject.GetComponent<Enemy>().사용할 함수 이름(인자들);
+     * 
+     * 
+     */
+
     //직선으로 이동
     public void MoveEnemy(Vector3 endPoint, float time)
     {
@@ -55,18 +62,13 @@ public class Enemy : MonoBehaviour
 
         yield return 0;
     }
-
+    //크기를 조절하는 함수
     public void ScaleEnemy(Vector3 endScale , float time)
     {
         Vector3 startScale = this.transform.localScale;
         StartCoroutine(ScaleEnemyCor( startScale, endScale, time));
     }
-
-    public void TrackingPalyer(float time)
-    {
-        StartCoroutine(TrackingPlayerCor(this.transform.position, time));
-    }
-
+    //크기를 조절하는 코루틴
    IEnumerator ScaleEnemyCor(Vector3 startScale, Vector3 endScale, float time)
     {
         for(int i = 0; i <= time; i++)
@@ -77,15 +79,20 @@ public class Enemy : MonoBehaviour
 
         yield return 0;
     }
-
-
+    //플레이어를 추적하는 탄환을 발사하는 함수
+    public void TrackingPalyer(float time)
+    {
+        StartCoroutine(TrackingPlayerCor(this.transform.position, time));
+    }
+    //플레이어를 추적하는 탄환을 발사하는 코루틴
     IEnumerator TrackingPlayerCor(Vector3 startPoint, float time)
     {
         Vector3 playerPoint = PlayerManager.playerManager.Player.transform.position;
         for (int i = 1; i <= time; i++)
         {
-            this.gameObject.transform.position = Vector3.Lerp(startPoint, playerPoint, i/time);//원형 보간
-            startPoint = this.gameObject.transform.localScale;
+         
+            this.gameObject.transform.position = Vector3.Slerp(startPoint, playerPoint, i/time);
+            //startPoint = this.gameObject.transform.localScale;
             yield return new WaitForFixedUpdate();
         }
         

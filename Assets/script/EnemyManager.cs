@@ -134,9 +134,9 @@ public class EnemyManager : MonoBehaviour
 
         temp[15].GetComponent<Enemy>().MoveEnemy(new Vector3(0, 2, 0), 100f);
         yield return new WaitForSecondsRealtime(3f);
-        temp[15].GetComponent<Enemy>().TrackingPalyer(200f);
+        temp[15].GetComponent<Enemy>().TrackingPalyer(50f);
 
-        for(int i = 0; i <= 200; i++) { 
+        for(int i = 0; i <= 50; i++) { 
         yield return new WaitForFixedUpdate();
         }
         Destroy(temp[15]);

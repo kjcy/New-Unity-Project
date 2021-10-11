@@ -328,7 +328,7 @@ public class PlayerManager : MonoBehaviour
 
     private void abilityaction()
     {
-        StartCoroutine(Abilityaction());
+        StartCoroutine(Abilityaction());//코루틴을 저장하는 변수를 생성하여 작동할 수 있도록
     }
     IEnumerator Abilityaction()
     {
