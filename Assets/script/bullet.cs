@@ -26,7 +26,8 @@ public class bullet : MonoBehaviour
         if (collision.transform.CompareTag("boss"))
         {
             Debug.Log("총알 충돌");
-            manager.GetabilityBar();
+            //총알의 데미지로 어빌리티를 충전한다면 어빌리티를 사용한 것으로 다시 일정양을 충전하기 때문에 생각을 해봐야 한다.
+            //manager.GetabilityBar();
             collision.GetComponent<boss>().Hpdonw(damge, collision.gameObject);
         }
     }

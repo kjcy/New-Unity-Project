@@ -252,10 +252,11 @@ public class PlayerManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(abilityBar > 1)
+            if(abilityBar >= 1)
             {
-                abilityBar -= Mathf.Floor(abilityBar);
-                abilityaction();
+                float abilityAct = Mathf.Floor(abilityBar);//사용할 어빌리티양을 저장
+                abilityBar -= abilityAct;
+                abilityaction(abilityAct);//사용한 어빌리티 양* 5만큼 총알이 나간다.
             }
         }
 
@@ -326,14 +327,14 @@ public class PlayerManager : MonoBehaviour
         return false;
     }
 
-    private void abilityaction()
+    private void abilityaction(float abilityBar)
     {
-        StartCoroutine(Abilityaction());//코루틴을 저장하는 변수를 생성하여 작동할 수 있도록
+        StartCoroutine(Abilityaction(abilityBar));//코루틴을 저장하는 변수를 생성하여 작동할 수 있도록
     }
-    IEnumerator Abilityaction()
+    IEnumerator Abilityaction(float abilityBar)
     {
         Quaternion v = player.transform.GetChild(0).rotation;
-        for(int i = 0; i < 15; i++)
+        for(int i = 0; i < abilityBar* 5; i++)
         {
             GameObject bullettemp = Instantiate(bullet, player.transform.GetChild(0).position, v);
             bullettemp.GetComponent<bullet>().manager = this;
