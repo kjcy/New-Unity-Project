@@ -53,6 +53,8 @@
     <UnityVersion>2019.4.30f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Game_Portal\Script\NextPrefab.cs" />
+    <Compile Include="Assets\Game_Portal\Script\UserCamera.cs" />
     <Compile Include="Assets\script\EnemyManager.cs" />
     <Compile Include="Assets\script\EnemyScript\Enemy.cs" />
     <Compile Include="Assets\script\EnemyScript\barrage.cs" />
@@ -61,7 +63,14 @@
     <Compile Include="Assets\script\GameManager.cs" />
     <Compile Include="Assets\script\Player.cs" />
     <Compile Include="Assets\script\PlayerManager.cs" />
+    <Compile Include="Assets\script\SelectScene\SmokeMove.cs" />
+    <Compile Include="Assets\script\StartScene\ButtonSystem.cs" />
+    <Compile Include="Assets\script\StartScene\SoundManager.cs" />
+    <Compile Include="Assets\script\StartScene\SpriteManager.cs" />
     <Compile Include="Assets\script\bullet.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Game_Portal\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
