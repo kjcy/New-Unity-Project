@@ -79,26 +79,57 @@ public class Enemy : MonoBehaviour
 
         yield return 0;
     }
-    //플레이어를 추적하는 탄환을 발사하는 함수
-    public void TrackingPalyer(float time)
+    //휘어지는 탄환을 발사하는 함수
+    public void reflex(Vector3 endPoint ,float time)
     {
-        StartCoroutine(TrackingPlayerCor(this.transform.position, time));
+        Vector3 startPoint = this.transform.position;
+        StartCoroutine(TrackingPlayerCor(startPoint,endPoint, time));
     }
-    //플레이어를 추적하는 탄환을 발사하는 코루틴
-    IEnumerator TrackingPlayerCor(Vector3 startPoint, float time)
+    //휘어지는 탄환을 발사하는 코루틴
+    IEnumerator TrackingPlayerCor(Vector3 startPoint,Vector3 endPoint, float time)
     {
-        Vector3 playerPoint = PlayerManager.playerManager.Player.transform.position;
+       
+
+
         for (int i = 1; i <= time; i++)
         {
-         
-            this.gameObject.transform.position = Vector3.Slerp(startPoint, playerPoint, i/time);
-            //startPoint = this.gameObject.transform.localScale;
+           
+            this.gameObject.transform.position = Vector3.Slerp(startPoint, endPoint, i/time);
+                //startPoint = this.gameObject.transform.localScale;
+           
+           
             yield return new WaitForFixedUpdate();
         }
         
 
         yield return 0;
     }
+
+    //s모형으로 위아래 이동하는 방식
+    public void Uturn(Vector3 endPoint, float time, float moveRound)
+    {
+        Vector3 startPoint = this.transform.position;
+        StartCoroutine(UturnCor(startPoint, endPoint, time, moveRound));
+    }
+
+    IEnumerator UturnCor(Vector3 startPoint, Vector3 endPoint, float time,float moveRound)
+    {
+      
+        for(int i = 0; i <= time; i++)
+        {
+
+
+            
+            this.gameObject.transform.position = new Vector3(Mathf.Lerp(startPoint.x, endPoint.x, i / time)
+                , startPoint.y + (endPoint.y-startPoint.y)* Mathf.Sin(i*Time.deltaTime)//y시작위치에서 moveRound 까지 왕복한다.
+                , 0);
+
+            yield return new WaitForFixedUpdate();
+        }
+        this.gameObject.transform.position = endPoint;
+        yield return 0;
+    }
+
 
 
 }

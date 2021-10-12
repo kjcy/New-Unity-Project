@@ -18,6 +18,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private GameObject[] barragebox = new GameObject[5];
 
+    private IEnumerator BossPattenCor = null;
+    private bool stage2 = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,43 +33,94 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if(gameManager.play) { 
-                pattentime += 1;
-            
+        Patten();
+    }
 
-            if(mainBoss.GetComponent<Enemy>().hp<100)
+    public void Patten()
+    {
+        
+
+        if (gameManager.play)
+        {
+            if(BossPattenCor == null)//막 처음 시작할때 패턴이 없다면 1페이지 코루틴을 시작한다.
             {
-                if (Mathf.Round(pattentime) % 500 == 0)
-                {
-                    if (mainBoss.transform.position.y < 0)
-                    {
-                        mainBoss.GetComponent<Enemy>().MoveEnemy(new Vector3(8, 2.5f, 0), 300);
-                    }
-                    else
-                    {
-                        mainBoss.GetComponent<Enemy>().MoveEnemy(new Vector3(8, -2.5f, 0), 300);
-                    }
-                }
-                if(Mathf.Round(pattentime)%600 == 0) { 
-                Debug.Log("패턴발사~~");
-                StartCoroutine(pattenCor2());
-                }
+                BossPattenCor = PattenStage1Cor();
+                StartCoroutine(BossPattenCor);
             }
-            else { 
-                if(pattentime % 1200 == 0)
-                {
-                    StartCoroutine(pattenCor());
-                }else if(pattentime % 600 == 0)
-                {
-                    StartCoroutine(pattenCor1());
-                }else if(pattentime % 1530 == 0)
-                {
-                    Debug.Log("테스트중");                 
-                    StartCoroutine(pattenTestCor());
-                }
+
+            if(mainBoss.GetComponent<Enemy>().hp < 300&& stage2)//체력이 100이하 내려간다면 1페이지 코루틴을 종료하고 2페이지 코루틴을 실행한다.
+            {
+                stage2 = false;
+                StopCoroutine(BossPattenCor);
+                BossPattenCor = PattenStage2Cor();
+                StartCoroutine(BossPattenCor);
             }
+
+
+
+
         }
     }
+
+    //1페이즈 코루틴
+    IEnumerator PattenStage1Cor()
+    {
+        do
+        {
+            
+            for (int i = 0; i < 4; i++)
+            {
+                temp[i] = Instantiate(barragebox[0], mainBoss.transform.position + new Vector3(0,-1.3f,0), Quaternion.identity, barrageParent);
+            }
+            temp[4] = Instantiate(barragebox[1], mainBoss.transform.position + new Vector3(0, -1.3f, 0), Quaternion.identity, barrageParent);
+            
+            for(int i = 0; i < 5; i++)
+            {
+                temp[i].GetComponent<Enemy>().MoveEnemy(mainBoss.transform.position + new Vector3(-20, -1.3f, 0), 100f);
+                yield return new WaitForSecondsRealtime(0.95f);
+            }
+            yield return new WaitForSecondsRealtime(3f);//5초 뒤에 다음 패턴
+            for(int i = 0; i < 3; i++) { 
+            temp[0] = Instantiate(barragebox[i%2], new Vector3(7,0,0), Quaternion.identity, barrageParent);
+            temp[1] = Instantiate(barragebox[(i+1)%2], new Vector3(7, 0, 0), Quaternion.identity, barrageParent);
+
+            temp[0].GetComponent<Enemy>().Uturn(new Vector3(-20, 3, 0), 250f, 3f);
+            temp[1].GetComponent<Enemy>().Uturn(new Vector3(-20, -3, 0), 250f, -3f);
+
+                yield return new WaitForSecondsRealtime(0.77f);
+            }
+            yield return new WaitForSecondsRealtime(3f);
+        } while (true);
+    }
+
+   
+    //2페이즈 코루틴
+    IEnumerator PattenStage2Cor()
+    {
+        do
+        {
+            GameObject[] temp = new GameObject[5];
+            for(int i = 0; i < 3; i++)
+            {
+                temp[i] = Instantiate(barragebox[0], new Vector3(-5 + i * 3, 5, 0), Quaternion.identity, barrageParent);
+                temp[i].GetComponent<Enemy>().MoveEnemy(temp[i].transform.position + new Vector3(0, -3, 0), 150f);
+            }
+            yield return new WaitForSecondsRealtime(2f);
+            
+                for(int i = 0; i < 3; i++)
+                {
+                    if (temp[i] == false) continue;
+                    temp[i].GetComponent<Enemy>().reflex(gameManager.PlayerManager.Player.transform.position, 50f);
+
+                    yield return new WaitForSecondsRealtime(0.55f);    
+                }
+                
+            yield return new WaitForSecondsRealtime(5f);
+        } while (true);
+    }
+
+
+
 
     public void BossDie()
     {
@@ -75,71 +128,13 @@ public class EnemyManager : MonoBehaviour
         {
             Destroy(barrageParent.GetChild(i).gameObject);
         }
+        StopCoroutine(BossPattenCor);//보스가 죽을 경우 코루틴 종료
         gameManager.GameOver.Invoke();//게임이 끝났다는것을 알려준다.
     }
 
-    IEnumerator pattenCor()
-    {
+   
 
-        for(int i = 0; i < 3; i++)
-        {
-            temp[i] = Instantiate(barragebox[0], mainBoss.transform.position - new Vector3(0,0.5f,0), Quaternion.identity, barrageParent);
-            temp[i].GetComponent<Enemy>().MoveEnemy(new Vector3(temp[i].transform.position.x - 20f, temp[i].transform.position.y-0.5f, temp[i].transform.position.z), 150f);
-            yield return new WaitForSecondsRealtime(1.22f);
-        }
+   
 
-        
-
-     
-    }
-
-    IEnumerator pattenCor1()
-    {
-        for(int i = 3; i < 7; i++)
-        {
-            temp[i] = Instantiate(barragebox[0], mainBoss.transform.position - new Vector3(0, 0.5f, 0), Quaternion.identity, barrageParent);
-            temp[i].GetComponent<Enemy>().MoveEnemy(new Vector3(temp[i].transform.position.x - 20f, temp[i].transform.position.y, temp[i].transform.position.z), 150f);
-            yield return new WaitForSecondsRealtime(0.75f);
-        }
-        temp[7] = Instantiate(barragebox[1], mainBoss.transform.position - new Vector3(0, 0.5f, 0), Quaternion.identity, barrageParent);
-        temp[7].GetComponent<Enemy>().MoveEnemy(new Vector3(temp[7].transform.position.x - 20f, temp[7].transform.position.y, temp[7].transform.position.z), 150f);
-       
-    }
-
-    IEnumerator pattenCor2()
-    {
-        GameObject footholdTemp = Instantiate(foothold, new Vector3(-3, -1, 0), Quaternion.identity);
-
-        for(int i = 8; i < 15; i++)
-        {
-            temp[i] = Instantiate(barragebox[i%2], mainBoss.transform.position + new Vector3(0, Random.Range(-1, 1), 0), Quaternion.identity, barrageParent);
-            yield return new WaitForSecondsRealtime(0.12f);
-        }
-
-        for(int i = 8; i < 15; i++)
-        {
-            temp[i].GetComponent<Enemy>().MoveEnemy(new Vector3(temp[i].transform.position.x - 20f, temp[i].transform.position.y, temp[i].transform.position.z), 150f);
-            temp[i].GetComponent<Enemy>().ScaleEnemy(new Vector3(1.5f, 1.5f, 1), 150f);
-            yield return new WaitForSecondsRealtime(0.334f);
-        }
-
-        Destroy(footholdTemp);
-
-    }
-
-
-    IEnumerator pattenTestCor()
-    {
-        temp[15] = Instantiate(barragebox[0], mainBoss.transform.position, Quaternion.identity, barrageParent);
-
-        temp[15].GetComponent<Enemy>().MoveEnemy(new Vector3(0, 2, 0), 100f);
-        yield return new WaitForSecondsRealtime(3f);
-        temp[15].GetComponent<Enemy>().TrackingPalyer(50f);
-
-        for(int i = 0; i <= 50; i++) { 
-        yield return new WaitForFixedUpdate();
-        }
-        Destroy(temp[15]);
-    }
 
 }

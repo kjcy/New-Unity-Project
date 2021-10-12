@@ -121,7 +121,7 @@ public class PlayerManager : MonoBehaviour
     private void PlayerDown()
     {
         
-       //먼가 이상한것 같기도
+       //먼가 이상한것 같기도 바닥에 발판이 있을때
         if(RaycastHit()) { 
                 jumpPlayer = false;
                 Debug.Log("stap");
@@ -183,6 +183,18 @@ public class PlayerManager : MonoBehaviour
                 StartCoroutine(PlayerDownFrame(7));
                 }
         }
+        //카메라 밖으로 나가는것을 방지하는 방식
+        Vector3 playerPosition = Camera.main.WorldToViewportPoint(player.transform.position);
+        //x,y 값이 0보다 작다면 0으로 1보다 크다면 1로 고정한다.
+        Debug.LogFormat("spritesize:{0}", player.GetComponent<SpriteRenderer>().bounds.size.x / 2);
+
+        if (playerPosition.x < 0.05f) playerPosition.x = 0.05f;
+        if (playerPosition.x > 1 - 0.05f) playerPosition.x = 1 - 0.05f;
+        if (playerPosition.y < 0.05f) playerPosition.y = 0.05f;
+        if (playerPosition.y > 1 - 0.05f) playerPosition.y = 1 - 0.05f;
+
+        player.transform.position = Camera.main.ViewportToWorldPoint(playerPosition);
+
 
     }
 

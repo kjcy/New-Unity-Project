@@ -4,23 +4,33 @@ using UnityEngine;
 using UnityEngine.Events;
 public class GameManager : MonoBehaviour
 {
+    static public GameManager gameManager;
 
     public UnityEvent GameOver;
 
     [SerializeField]
     private EnemyManager enemyManager;
-
+    public EnemyManager EnemyManager
+    {
+        get { return enemyManager; }
+    }
     [SerializeField]
     public GameObject bossPripab;
 
     [SerializeField]
     private PlayerManager playerManager;
 
+    public PlayerManager PlayerManager
+    {
+        get { return playerManager; }
+    }
+
     public bool play = true;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = this;
         playerManager.gameManager = this;
         enemyManager.gameManager = this;
     }

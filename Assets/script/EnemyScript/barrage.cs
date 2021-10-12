@@ -9,7 +9,7 @@ public class barrage : Enemy
     {
         hp = 999;
         enemyType = type.barrage;
-        Destroy(this.gameObject, 15f);
+        Destroy(this.gameObject, 8f);
     }
 
 
