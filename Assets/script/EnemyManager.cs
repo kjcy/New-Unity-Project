@@ -107,14 +107,17 @@ public class EnemyManager : MonoBehaviour
             }
             yield return new WaitForSecondsRealtime(2f);
             
-                for(int i = 0; i < 3; i++)
-                {
-                    if (temp[i] == false) continue;
-                    temp[i].GetComponent<Enemy>().reflex(gameManager.PlayerManager.Player.transform.position, 50f);
+            for(int i = 0; i < 3; i++)
+            {
+                if (temp[i] == false) continue;
+                temp[i].GetComponent<Enemy>().reflex(gameManager.PlayerManager.Player.transform.position, 50f);
 
-                    yield return new WaitForSecondsRealtime(0.55f);    
-                }
-                
+                yield return new WaitForSecondsRealtime(0.77f);
+                Destroy(temp[i]);
+            }
+           
+            
+
             yield return new WaitForSecondsRealtime(5f);
         } while (true);
     }
