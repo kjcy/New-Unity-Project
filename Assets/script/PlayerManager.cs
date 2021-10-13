@@ -39,7 +39,7 @@ public class PlayerManager : MonoBehaviour
 
     private float attackTime;
 
-    private float invincibilityTime;
+    private bool invincibility;
 
     private float speed;
     private int hp;
@@ -70,13 +70,13 @@ public class PlayerManager : MonoBehaviour
         attackTime = 0.75f;
         hp = 5;
         abilityBar = 0;
-        invincibilityTime = 1.5f;
+        invincibility = false;
     }
 
     private void Update()
     {
         if (gameManager.play) { 
-        invincibilityTime -= Time.deltaTime;
+        
         PlayerParring();
         PlayerMove();
         PlayerDown();
@@ -325,9 +325,9 @@ public class PlayerManager : MonoBehaviour
     //GameManager에서 호출하며 플레이어의 체력을 감소, 체력이 0이하가 된다면 GameManager 에서 게임 오버를 출력한다.
     public bool hpDown(int damage)
     {
-        if (invincibilityTime < 0) { 
+        if (!invincibility) {//무적이 아닐때 
              hp -= damage;
-            invincibilityTime = 1.5f;
+            InvincibilityActive(1.5f);
             if (hp < 1)
             {
                 return true;
@@ -339,6 +339,22 @@ public class PlayerManager : MonoBehaviour
         }
         return false;
     }
+
+    //만약 무적을 어빌리티로 사용할 때를 대비하여 분리한 무적 함수
+    public void InvincibilityActive(float time)
+    {
+        StartCoroutine(InvinibilityActiveCor(time));
+    }
+    //무적 코루틴
+    IEnumerator InvinibilityActiveCor(float time)
+    {
+        invincibility = true;
+        //이미지 또는 애니메이션 실행
+        yield return new WaitForSecondsRealtime(time);
+        invincibility = false;
+
+    }
+
 
     //어빌리티를 사용했을때 어빌리티 코루틴을 불러오는 함수
     private void abilityaction(float abilityBar)
