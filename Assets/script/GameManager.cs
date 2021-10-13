@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     static public GameManager gameManager;
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public GameObject bossPripab;
 
+    public Text startText;
+
     [SerializeField]
     private PlayerManager playerManager;
 
@@ -25,7 +28,7 @@ public class GameManager : MonoBehaviour
         get { return playerManager; }
     }
 
-    public bool play = true;
+    public bool play = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +36,20 @@ public class GameManager : MonoBehaviour
         gameManager = this;
         playerManager.gameManager = this;
         enemyManager.gameManager = this;
+        StartCoroutine(StartAni());
     }
 
+    IEnumerator StartAni()
+    {
+        for(int i = 0; i < 3; i++) {
+            startText.text =  string.Format("{0}",3-i);
+
+             yield return new WaitForSecondsRealtime(1f);
+        }
+        startText.gameObject.SetActive(false);
+        
+        play = true;
+    }
 
     public void EnemyHpDown(Enemy enemy ,int damge)
     {

@@ -288,6 +288,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    //패링에 돌입하는 코루틴
     IEnumerator Parring()
     {
         parringPlayer = true;
@@ -297,7 +298,7 @@ public class PlayerManager : MonoBehaviour
         player.GetComponent<SpriteRenderer>().sprite = playerSprite[0];
         yield return 0;
     }
-
+    //패링에 성공했을때 어빌리티바를 획득
     public void ParringSuccess()
     {
         Debug.Log("패링 성공");
@@ -310,7 +311,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    //시간이 지날때마다 능력 게이지가 차오른다.
+    //시간이 지날때마다 능력 게이지가 차오른다. 현재 사용 안함
     public void GetabilityBar()
     {
         if(abilityBar < 4f) { 
@@ -339,10 +340,13 @@ public class PlayerManager : MonoBehaviour
         return false;
     }
 
+    //어빌리티를 사용했을때 어빌리티 코루틴을 불러오는 함수
     private void abilityaction(float abilityBar)
     {
         StartCoroutine(Abilityaction(abilityBar));//코루틴을 저장하는 변수를 생성하여 작동할 수 있도록
     }
+
+    //어빌리티 코루틴
     IEnumerator Abilityaction(float abilityBar)
     {
         Quaternion v = player.transform.GetChild(0).rotation;

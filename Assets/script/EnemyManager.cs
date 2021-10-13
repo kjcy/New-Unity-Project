@@ -79,7 +79,9 @@ public class EnemyManager : MonoBehaviour
                 temp[i].GetComponent<Enemy>().MoveEnemy(mainBoss.transform.position + new Vector3(-20, -1.3f, 0), 100f);
                 yield return new WaitForSecondsRealtime(0.95f);
             }
+
             yield return new WaitForSecondsRealtime(3f);//5초 뒤에 다음 패턴
+
             for(int i = 0; i < 3; i++) { 
             temp[0] = Instantiate(barragebox[i%2], new Vector3(7,0,0), Quaternion.identity, barrageParent);
             temp[1] = Instantiate(barragebox[(i+1)%2], new Vector3(7, 0, 0), Quaternion.identity, barrageParent);
@@ -90,6 +92,7 @@ public class EnemyManager : MonoBehaviour
                 yield return new WaitForSecondsRealtime(0.77f);
             }
             yield return new WaitForSecondsRealtime(3f);
+
         } while (true);
     }
 
