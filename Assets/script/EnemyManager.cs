@@ -80,7 +80,7 @@ public class EnemyManager : MonoBehaviour
                 yield return new WaitForSecondsRealtime(0.95f);
             }
 
-            yield return new WaitForSecondsRealtime(3f);//5초 뒤에 다음 패턴
+            yield return new WaitForSecondsRealtime(3f);//3초 뒤에 다음 패턴
 
             for(int i = 0; i < 3; i++) { 
             temp[0] = Instantiate(barragebox[i%2], new Vector3(7,0,0), Quaternion.identity, barrageParent);
