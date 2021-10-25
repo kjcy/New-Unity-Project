@@ -79,9 +79,7 @@ public class EnemyManager : MonoBehaviour
                 temp[i].GetComponent<Enemy>().MoveEnemy(mainBoss.transform.position + new Vector3(-20, -1.3f, 0), 100f);
                 yield return new WaitForSecondsRealtime(0.95f);
             }
-
-            yield return new WaitForSecondsRealtime(3f);//3초 뒤에 다음 패턴
-
+            yield return new WaitForSecondsRealtime(3f);//5초 뒤에 다음 패턴
             for(int i = 0; i < 3; i++) { 
             temp[0] = Instantiate(barragebox[i%2], new Vector3(7,0,0), Quaternion.identity, barrageParent);
             temp[1] = Instantiate(barragebox[(i+1)%2], new Vector3(7, 0, 0), Quaternion.identity, barrageParent);
@@ -89,9 +87,33 @@ public class EnemyManager : MonoBehaviour
             temp[0].GetComponent<Enemy>().Uturn(new Vector3(-20, 3, 0), 250f, 3f);
             temp[1].GetComponent<Enemy>().Uturn(new Vector3(-20, -3, 0), 250f, -3f);
 
-                yield return new WaitForSecondsRealtime(0.77f);
+                yield return new WaitForSecondsRealtime(1f);
             }
-            yield return new WaitForSecondsRealtime(3f);
+            for (int i = 0; i < 4; i++)
+            {
+                temp[i] = Instantiate(barragebox[0], mainBoss.transform.position + new Vector3(5, -1.3f, 0), Quaternion.identity, barrageParent);
+            }
+            temp[4] = Instantiate(barragebox[1], mainBoss.transform.position + new Vector3(0, -1.3f, 0), Quaternion.identity, barrageParent);
+
+            for (int i = 0; i < 5; i++)
+            {
+                temp[i].GetComponent<Enemy>().MoveEnemy(mainBoss.transform.position + new Vector3(-25, -1.3f, 0), 100f);
+               
+            }
+            yield return new WaitForSecondsRealtime(0.85f);
+           
+          
+            for (int i = 0; i < 3; i++)
+            {
+                temp[0] = Instantiate(barragebox[i % 2], new Vector3(10, -3, 0), Quaternion.identity, barrageParent);
+                temp[1] = Instantiate(barragebox[(i + 1) % 2], new Vector3(20, -3, 0), Quaternion.identity, barrageParent);
+
+                temp[0].GetComponent<Enemy>().Uturn(new Vector3(-32, -2, 0), 250f, 3f);
+                temp[1].GetComponent<Enemy>().Uturn(new Vector3(-20, -3, 0), 250f, -3f);
+
+                yield return new WaitForSecondsRealtime(1f);
+            }
+
 
         } while (true);
     }
@@ -118,8 +140,18 @@ public class EnemyManager : MonoBehaviour
                 yield return new WaitForSecondsRealtime(0.77f);
                 Destroy(temp[i]);
             }
-           
-            
+            for (int i = 0; i < 3; i++)
+            {
+                temp[0] = Instantiate(barragebox[i % 2], new Vector3(10, -3, 0), Quaternion.identity, barrageParent);
+                temp[1] = Instantiate(barragebox[(i + 1) % 2], new Vector3(20, -3, 0), Quaternion.identity, barrageParent);
+
+                temp[0].GetComponent<Enemy>().Uturn(new Vector3(-25, -2, 0), 250f, 3f);
+                temp[1].GetComponent<Enemy>().Uturn(new Vector3(-20, -3, 0), 250f, -3f);
+
+                yield return new WaitForSecondsRealtime(1f);
+            }
+
+
 
             yield return new WaitForSecondsRealtime(5f);
         } while (true);
