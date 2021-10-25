@@ -31,6 +31,8 @@ public class PlayerManager : MonoBehaviour
 
     }
 
+    public Animator playerAnimator;
+
     [SerializeField]
     private GameObject bullet;
 
@@ -62,6 +64,7 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         playerManager = this;
+        playerAnimator = player.GetComponent<Animator>();
         speed = 7.5f;
         Debug.LogFormat("{0}", speed);
         downPlayer = true;
@@ -89,6 +92,25 @@ public class PlayerManager : MonoBehaviour
     {
         hpText.text = "hp :" + hp;
         abilityBarText.text = "ability : " +Mathf.Round( abilityBar*10)*0.1;
+    }
+
+    private void PlayAni(int index,bool runBoll)
+    {
+        switch (index)
+        {
+            case 0:
+                playerAnimator.SetTrigger("stop");//가만히 있을때
+                break;
+            case 1:
+                playerAnimator.SetBool("run",runBoll);//달리는 상태
+                break;
+            case 2:
+                playerAnimator.SetTrigger("attack");//공격상태
+                break;
+            case 3:
+                playerAnimator.SetTrigger("parring");//패링상태
+                break;
+        }
     }
 
     private bool RaycastHit(bool foothold = true)
@@ -158,12 +180,14 @@ public class PlayerManager : MonoBehaviour
         {
             Debug.Log("left");
             player.transform.position += new Vector3(-speed, 0, 0)*Time.deltaTime;
+            player.transform.localScale = new Vector3(-1, 1, 1);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             Debug.Log("right");
             player.transform.position += new Vector3(speed, 0, 0) * Time.deltaTime;
+            player.transform.localScale = new Vector3(1, 1, 1);
         }
 
         if (Input.GetKeyDown(KeyCode.W))

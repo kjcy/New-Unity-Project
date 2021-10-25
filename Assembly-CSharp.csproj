@@ -61,6 +61,10 @@
     <Compile Include="Assets\script\GameManager.cs" />
     <Compile Include="Assets\script\Player.cs" />
     <Compile Include="Assets\script\PlayerManager.cs" />
+    <Compile Include="Assets\script\SelectScene\SmokeMove.cs" />
+    <Compile Include="Assets\script\StartScene\ButtonSystem.cs" />
+    <Compile Include="Assets\script\StartScene\SoundManager.cs" />
+    <Compile Include="Assets\script\StartScene\SpriteManager.cs" />
     <Compile Include="Assets\script\bullet.cs" />
   </ItemGroup>
   <ItemGroup>
