@@ -91,95 +91,56 @@ public class EnemyManager : MonoBehaviour
     }
 
     //1페이즈 코루틴
- IEnumerator PattenStage1Cor()
+    IEnumerator PattenStage1Cor()
     {
         do
         {
             
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++) //직선 패턴 
             {
                 temp[i] = Instantiate(barragebox[0], mainBoss.transform.position + new Vector3(0,-1.3f,0), Quaternion.identity, barrageParent);
                 temp[i].GetComponent<Enemy>().MoveEnemy(mainBoss.transform.position + new Vector3(-20, -1.3f, 0), 100f);
-                yield return new WaitForSecondsRealtime(1f);
+                yield return new WaitForSecondsRealtime(1f);//1초 뒤에 다음 패턴
 
             }
             temp[4] = Instantiate(barragebox[1], mainBoss.transform.position + new Vector3(0, -1.3f, 0), Quaternion.identity, barrageParent);
             temp[4].GetComponent<Enemy>().MoveEnemy(mainBoss.transform.position + new Vector3(-20, -1.3f, 0), 100f);
-            yield return new WaitForSecondsRealtime(1f);
+         
 
-          
-            yield return new WaitForSecondsRealtime(3f);//5초 뒤에 다음 패턴
-            for(int i = 0; i < 3; i++) { 
+
+            yield return new WaitForSecondsRealtime(3f);//3초 뒤에 다음 패턴
+           
+            for(int i = 0; i < 3; i++) // 엇갈리는 패턴 
+            { 
             temp[0] = Instantiate(barragebox[i%2], new Vector3(7,0,0), Quaternion.identity, barrageParent);
             temp[1] = Instantiate(barragebox[(i+1)%2], new Vector3(7, 0, 0), Quaternion.identity, barrageParent);
 
             temp[0].GetComponent<Enemy>().Uturn(new Vector3(-20, 3, 0), 250f, 3f);
             temp[1].GetComponent<Enemy>().Uturn(new Vector3(-20, -3, 0), 250f, -3f);
 
-                yield return new WaitForSecondsRealtime(1f);
+                yield return new WaitForSecondsRealtime(1f);//1초 뒤에 다음 패턴
             }
 
-            yield return new WaitForSecondsRealtime(3f);
-
-            for (int i = 0; i < 4; i++)
+            yield return new WaitForSecondsRealtime(2f);//2초 뒤에 다음 패턴
+         
+            for (int i = 0; i < 3; i++)  // 직선 나오는 패턴 + 통통 튀는 탄환 패턴 
             {
-                temp[i] = Instantiate(barragebox[0], mainBoss.transform.position + new Vector3(5, -1.3f, 0), Quaternion.identity, barrageParent);//보스 위치 + 5여서 뒤에서 나가는 것으로 보임
-            }
-            temp[4] = Instantiate(barragebox[1], mainBoss.transform.position + new Vector3(0, -1.3f, 0), Quaternion.identity, barrageParent);//패팅 탄은 보스위치에 소환
+                temp[0] = Instantiate(barragebox[i % 2], new Vector3(7,-3, 0), Quaternion.identity, barrageParent);
+                temp[1] = Instantiate(barragebox[(i + 1) % 2], new Vector3(7, -3, 0), Quaternion.identity, barrageParent);
 
-            for (int i = 0; i < 5; i++)
-            {
-                temp[i].GetComponent<Enemy>().MoveEnemy(mainBoss.transform.position + new Vector3(-25, -1.3f, 0), 100f);
-               
-            }
-            yield return new WaitForSecondsRealtime(2f);
-           
-          
-            for (int i = 0; i < 3; i++)
-            {
-                temp[0] = Instantiate(barragebox[i % 2], new Vector3(10, -3, 0), Quaternion.identity, barrageParent);
-                temp[1] = Instantiate(barragebox[(i + 1) % 2], new Vector3(20, -3, 0), Quaternion.identity, barrageParent);
-
-                temp[0].GetComponent<Enemy>().Uturn(new Vector3(-32, -2, 0), 250f, 3f);
+                temp[0].GetComponent<Enemy>().Uturn(new Vector3(-20, 3, 0), 250f, 3f);
                 temp[1].GetComponent<Enemy>().Uturn(new Vector3(-20, -3, 0), 250f, -3f);
 
-                yield return new WaitForSecondsRealtime(1f);
-           
-            }
-            yield return new WaitForSecondsRealtime(2f);
-
-
-            for (int i = 0; i < 4; i++)
-            {
-                temp[i] = Instantiate(barragebox[0], mainBoss.transform.position + new Vector3(5, -1.3f, 0), Quaternion.identity, barrageParent);
-            }
-            temp[4] = Instantiate(barragebox[1], mainBoss.transform.position + new Vector3(0, -1.3f, 0), Quaternion.identity, barrageParent);
-
-            for (int i = 0; i < 5; i++)
-            {
-                temp[i].GetComponent<Enemy>().MoveEnemy(mainBoss.transform.position + new Vector3(-25, -1.3f, 0), 100f);
                
-            }
-            yield return new WaitForSecondsRealtime(2f);
-           
-          
-            for (int i = 0; i < 3; i++)
-            {
-                temp[0] = Instantiate(barragebox[i % 2], new Vector3(10, -3, 0), Quaternion.identity, barrageParent);
-                temp[1] = Instantiate(barragebox[(i + 1) % 2], new Vector3(20, -3, 0), Quaternion.identity, barrageParent);
+            }  
+   
+            yield return new WaitForSecondsRealtime(1f); //1초 뒤에 다음 패턴
 
-                temp[0].GetComponent<Enemy>().Uturn(new Vector3(-32, -2, 0), 250f, 3f);
-                temp[1].GetComponent<Enemy>().Uturn(new Vector3(-20, -3, 0), 250f, -3f);
-
-                yield return new WaitForSecondsRealtime(1f);
-            }
-            
-            yield return new WaitForSecondsRealtime(2f);
-       
         } while (true);
 
     }
-
+     
+    // 2페이지는 2페이지 답게 난이도를 조금 올렸습니다.
    
     //2페이즈 코루틴
     IEnumerator PattenStage2Cor()
@@ -187,7 +148,7 @@ public class EnemyManager : MonoBehaviour
         do
         {
             GameObject[] temp = new GameObject[5];
-            for(int i = 0; i < 3; i++)
+            for(int i = 0; i < 3; i++) // 유도 탄환 패턴 
             {
                 temp[i] = Instantiate(barragebox[0], new Vector3(-5 + i * 3, 5, 0), Quaternion.identity, barrageParent);
                 temp[i].GetComponent<Enemy>().MoveEnemy(temp[i].transform.position + new Vector3(0, -3, 0), 150f);
@@ -202,9 +163,7 @@ public class EnemyManager : MonoBehaviour
                 yield return new WaitForSecondsRealtime(0.77f);
                 Destroy(temp[i]);
             }
-             yield return new WaitForSecondsRealtime(2f);
-            
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++) // 2개 겹쳐서 나오는 패턴 점프해서 피하는 패턴 
             {
                 temp[0] = Instantiate(barragebox[i % 2], new Vector3(10, -3, 0), Quaternion.identity, barrageParent);
                 temp[1] = Instantiate(barragebox[(i + 1) % 2], new Vector3(20, -3, 0), Quaternion.identity, barrageParent);
@@ -212,15 +171,25 @@ public class EnemyManager : MonoBehaviour
                 temp[0].GetComponent<Enemy>().Uturn(new Vector3(-25, -2, 0), 250f, 3f);
                 temp[1].GetComponent<Enemy>().Uturn(new Vector3(-20, -3, 0), 250f, -3f);
 
+
                 yield return new WaitForSecondsRealtime(1f);
             }
+            yield return new WaitForSecondsRealtime(2f);//2초 뒤에 다음 패턴
+            for (int i = 0; i < 3; i++)  // 직선 나오는 패턴 + 통통 튀는 탄환 패턴 
+            {
+                temp[0] = Instantiate(barragebox[i % 2], new Vector3(7, -3, 0), Quaternion.identity, barrageParent);
+                temp[1] = Instantiate(barragebox[(i + 1) % 2], new Vector3(7, -3, 0), Quaternion.identity, barrageParent);
 
+                temp[0].GetComponent<Enemy>().Uturn(new Vector3(-20, 3, 0), 250f, 3f);
+                temp[1].GetComponent<Enemy>().Uturn(new Vector3(-20, -3, 0), 250f, -3f);
+
+
+            }
 
 
             yield return new WaitForSecondsRealtime(5f);
         } while (true);
     }
-
 
 
 
