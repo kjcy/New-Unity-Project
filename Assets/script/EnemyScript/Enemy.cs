@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
         {
             if (this.gameObject.CompareTag("boss"))
             {
+                GameManager.gameManager.win = true;
                 GameManager.gameManager.GameOver.Invoke();
             }
             DestroyObject(this.gameObject);

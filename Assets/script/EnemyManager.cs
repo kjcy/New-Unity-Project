@@ -37,7 +37,9 @@ public class EnemyManager : MonoBehaviour
     {
         BossPattenCor = null;
         stage2 = true;
-       
+
+        gameManager.win = false;
+
         barrageParent = GameObject.Find("BarrageParent").transform;
         mainBoss = Instantiate(gameManager.bossPripab, new Vector3(8, -2, 0), Quaternion.identity);
         mainBoss.GetComponent<boss>().enemyManager = this;

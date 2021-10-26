@@ -35,8 +35,11 @@ public class GameManager : MonoBehaviour
     {
         get { return playerManager; }
     }
+    public bool win = false;
+    
     //플레이어의 조종 여부
     public bool play;
+
 
     //전투의 작동 여부
     public bool battle;
@@ -54,8 +57,25 @@ public class GameManager : MonoBehaviour
     //선택 신으로 이동할수 있도록 하는 함수
     public void GameEndLoadScene()
     {
-        
+
+        StartCoroutine(LoadSelectScene());
+    }
+
+    IEnumerator LoadSelectScene()
+    {
+        if (win)
+        {
+            //승리했다는 코드
+        }
+        else
+        {
+            //패배했다는 코드
+        }
+
+
+        yield return new WaitForSecondsRealtime(3f);
         SceneManager.LoadScene("SelectScene");
+        yield return 0;
     }
 
     //전투 신을 시작할때 잠시 대기하는 함수
