@@ -89,7 +89,7 @@ public class EnemyManager : MonoBehaviour
     }
 
     //1페이즈 코루틴
-    IEnumerator PattenStage1Cor()
+ IEnumerator PattenStage1Cor()
     {
         do
         {
@@ -98,12 +98,12 @@ public class EnemyManager : MonoBehaviour
             {
                 temp[i] = Instantiate(barragebox[0], mainBoss.transform.position + new Vector3(0,-1.3f,0), Quaternion.identity, barrageParent);
                 temp[i].GetComponent<Enemy>().MoveEnemy(mainBoss.transform.position + new Vector3(-20, -1.3f, 0), 100f);
-                yield return new WaitForSecondsRealtime(0.95f);
+                yield return new WaitForSecondsRealtime(1f);
 
             }
             temp[4] = Instantiate(barragebox[1], mainBoss.transform.position + new Vector3(0, -1.3f, 0), Quaternion.identity, barrageParent);
             temp[4].GetComponent<Enemy>().MoveEnemy(mainBoss.transform.position + new Vector3(-20, -1.3f, 0), 100f);
-            yield return new WaitForSecondsRealtime(0.95f);
+            yield return new WaitForSecondsRealtime(1f);
 
           
             yield return new WaitForSecondsRealtime(3f);//5초 뒤에 다음 패턴
@@ -117,7 +117,7 @@ public class EnemyManager : MonoBehaviour
                 yield return new WaitForSecondsRealtime(1f);
             }
 
-            yield return new WaitForSecondsRealtime(2f);
+            yield return new WaitForSecondsRealtime(3f);
 
             for (int i = 0; i < 4; i++)
             {
@@ -130,7 +130,7 @@ public class EnemyManager : MonoBehaviour
                 temp[i].GetComponent<Enemy>().MoveEnemy(mainBoss.transform.position + new Vector3(-25, -1.3f, 0), 100f);
                
             }
-            yield return new WaitForSecondsRealtime(0.85f);
+            yield return new WaitForSecondsRealtime(2f);
            
           
             for (int i = 0; i < 3; i++)
@@ -144,6 +144,7 @@ public class EnemyManager : MonoBehaviour
                 yield return new WaitForSecondsRealtime(1f);
            
             }
+            yield return new WaitForSecondsRealtime(2f);
 
 
             for (int i = 0; i < 4; i++)
@@ -157,7 +158,7 @@ public class EnemyManager : MonoBehaviour
                 temp[i].GetComponent<Enemy>().MoveEnemy(mainBoss.transform.position + new Vector3(-25, -1.3f, 0), 100f);
                
             }
-            yield return new WaitForSecondsRealtime(0.85f);
+            yield return new WaitForSecondsRealtime(2f);
            
           
             for (int i = 0; i < 3; i++)
@@ -170,8 +171,11 @@ public class EnemyManager : MonoBehaviour
 
                 yield return new WaitForSecondsRealtime(1f);
             }
-
+            
+            yield return new WaitForSecondsRealtime(2f);
+       
         } while (true);
+
     }
 
    
@@ -196,6 +200,8 @@ public class EnemyManager : MonoBehaviour
                 yield return new WaitForSecondsRealtime(0.77f);
                 Destroy(temp[i]);
             }
+             yield return new WaitForSecondsRealtime(2f);
+            
             for (int i = 0; i < 3; i++)
             {
                 temp[0] = Instantiate(barragebox[i % 2], new Vector3(10, -3, 0), Quaternion.identity, barrageParent);
