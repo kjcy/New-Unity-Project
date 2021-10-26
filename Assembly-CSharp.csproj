@@ -53,8 +53,8 @@
     <UnityVersion>2019.4.30f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Assets\Game_Portal\Script\NextPrefab.cs" />
-    <Compile Include="Assets\Game_Portal\Script\UserCamera.cs" />
+    <Compile Include="Assets\BMP\Game_Portal\Script\NextPrefab.cs" />
+    <Compile Include="Assets\BMP\Game_Portal\Script\UserCamera.cs" />
     <Compile Include="Assets\script\DontDestoryGameObject.cs" />
     <Compile Include="Assets\script\EnemyManager.cs" />
     <Compile Include="Assets\script\EnemyScript\Enemy.cs" />
@@ -73,7 +73,7 @@
     <Compile Include="Assets\script\bullet.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Game_Portal\Readme.txt" />
+    <None Include="Assets\BMP\Game_Portal\Readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

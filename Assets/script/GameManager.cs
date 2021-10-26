@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     public Sprite reddysprite;
     public Sprite startsprite;
 
+    public Sprite page2Background;
+
     public PlayerManager PlayerManager
     {
         get { return playerManager; }

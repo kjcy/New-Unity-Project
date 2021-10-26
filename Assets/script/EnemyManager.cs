@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 public class EnemyManager : MonoBehaviour
 {
     public GameManager gameManager;
@@ -79,9 +80,7 @@ public class EnemyManager : MonoBehaviour
             if(mainBoss.GetComponent<Enemy>().hp < 300&& stage2)//체력이 100이하 내려간다면 1페이지 코루틴을 종료하고 2페이지 코루틴을 실행한다.
             {
                 stage2 = false;
-                StopCoroutine(BossPattenCor);
-                BossPattenCor = PattenStage2Cor();
-                StartCoroutine(BossPattenCor);
+                StartCoroutine(page2Start());
             }
 
 
@@ -89,6 +88,33 @@ public class EnemyManager : MonoBehaviour
 
         }
     }
+
+    IEnumerator page2Start()
+    {
+        StopCoroutine(BossPattenCor);
+        GameObject changeBackgound = GameObject.Find("ChangeBackground");
+        for(int i = 0; i <= 30; i++)
+        {
+            changeBackgound.GetComponent<Image>().color = new Color(255, 255, 255, (i/30f));
+            yield return new WaitForSecondsRealtime(0.05f);
+        }
+
+        GameObject.Find("Background").GetComponent<SpriteRenderer>().sprite = gameManager.page2Background;
+        for (int i = 0; i <= 30; i++)
+        {
+            changeBackgound.GetComponent<Image>().color = new Color(255, 255, 255, 1-(i / 30f));
+            yield return new WaitForSecondsRealtime(0.05f);
+        }
+
+        yield return new WaitForSecondsRealtime(0.5f);
+       
+      
+        BossPattenCor = PattenStage2Cor();
+        StartCoroutine(BossPattenCor);
+        yield return null;
+    }
+
+
 
     //1페이즈 코루틴
     IEnumerator PattenStage1Cor()
