@@ -71,14 +71,15 @@ public class EnemyManager : MonoBehaviour
             for (int i = 0; i < 4; i++)
             {
                 temp[i] = Instantiate(barragebox[0], mainBoss.transform.position + new Vector3(0,-1.3f,0), Quaternion.identity, barrageParent);
-            }
-            temp[4] = Instantiate(barragebox[1], mainBoss.transform.position + new Vector3(0, -1.3f, 0), Quaternion.identity, barrageParent);
-            
-            for(int i = 0; i < 5; i++)
-            {
                 temp[i].GetComponent<Enemy>().MoveEnemy(mainBoss.transform.position + new Vector3(-20, -1.3f, 0), 100f);
                 yield return new WaitForSecondsRealtime(0.95f);
+
             }
+            temp[4] = Instantiate(barragebox[1], mainBoss.transform.position + new Vector3(0, -1.3f, 0), Quaternion.identity, barrageParent);
+            temp[4].GetComponent<Enemy>().MoveEnemy(mainBoss.transform.position + new Vector3(-20, -1.3f, 0), 100f);
+            yield return new WaitForSecondsRealtime(0.95f);
+
+          
             yield return new WaitForSecondsRealtime(3f);//5초 뒤에 다음 패턴
             for(int i = 0; i < 3; i++) { 
             temp[0] = Instantiate(barragebox[i%2], new Vector3(7,0,0), Quaternion.identity, barrageParent);
@@ -89,6 +90,9 @@ public class EnemyManager : MonoBehaviour
 
                 yield return new WaitForSecondsRealtime(1f);
             }
+
+            yield return new WaitForSecondsRealtime(2f);
+
             for (int i = 0; i < 4; i++)
             {
                 temp[i] = Instantiate(barragebox[0], mainBoss.transform.position + new Vector3(5, -1.3f, 0), Quaternion.identity, barrageParent);
@@ -114,7 +118,9 @@ public class EnemyManager : MonoBehaviour
                 yield return new WaitForSecondsRealtime(1f);
            
             }
-for (int i = 0; i < 4; i++)
+
+
+            for (int i = 0; i < 4; i++)
             {
                 temp[i] = Instantiate(barragebox[0], mainBoss.transform.position + new Vector3(5, -1.3f, 0), Quaternion.identity, barrageParent);
             }
