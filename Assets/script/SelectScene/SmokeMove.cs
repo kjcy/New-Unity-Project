@@ -9,17 +9,13 @@ public class SmokeMove : MonoBehaviour
 
     float leftPosX = 0f;
     float rightPosX = 0f;
-    float xScreenHalfSize;
-    float yScreenHalfSize;
+
+    float backgroundWidth;
+
     // Start is called before the first frame update
     void Start()
     {
-        yScreenHalfSize = Camera.main.orthographicSize;
-        xScreenHalfSize = yScreenHalfSize * Camera.main.aspect;
-
-        leftPosX = -(xScreenHalfSize * 2);
-        rightPosX = xScreenHalfSize * 2 * backgrounds.Length;
-
+        backgroundWidth = backgrounds[1].position.x;
     }
 
     // Update is called once per frame
@@ -29,10 +25,10 @@ public class SmokeMove : MonoBehaviour
         {
             backgrounds[i].position += new Vector3(-speed, 0, 0) * Time.deltaTime;
 
-            if (backgrounds[i].position.x < leftPosX)
+            if (backgrounds[i].position.x < -backgroundWidth)
             {
                 Vector3 nextPos = backgrounds[i].position;
-                nextPos = new Vector3(nextPos.x + rightPosX, nextPos.y, nextPos.z);
+                nextPos = new Vector3(backgroundWidth, nextPos.y, nextPos.z);
                 backgrounds[i].position = nextPos;
             }
         }
