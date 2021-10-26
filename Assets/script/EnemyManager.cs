@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class EnemyManager : MonoBehaviour
 {
     public GameManager gameManager;
+
+    
+
     public GameObject foothold;
     public Transform barrageParent;
 
@@ -24,12 +27,21 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
 
-        mainBoss = Instantiate(gameManager.bossPripab, new Vector3(8, -2, 0), Quaternion.identity);
-        mainBoss.GetComponent<boss>().enemyManager = this;
-        BossAni = mainBoss.GetComponent<Animator>();
+       
     //    StartCoroutine(pattenCor());
         
     }
+
+    //지금 scene 공유를 위해 코드 변경하는중
+    public void CreateBoss(int index)
+    {
+        barrageParent = GameObject.Find("BarrageParent").transform;
+        mainBoss = Instantiate(gameManager.bossPripab, new Vector3(8, -2, 0), Quaternion.identity);
+        mainBoss.GetComponent<boss>().enemyManager = this;
+        BossAni = mainBoss.GetComponent<Animator>();
+    }
+
+
 
     // Update is called once per frame
     void Update()
@@ -51,7 +63,7 @@ public class EnemyManager : MonoBehaviour
     {
         
 
-        if (gameManager.play)
+        if (gameManager.battle)
         {
             if(BossPattenCor == null)//막 처음 시작할때 패턴이 없다면 1페이지 코루틴을 시작한다.
             {

@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Assets\Game_Portal\Script\NextPrefab.cs" />
     <Compile Include="Assets\Game_Portal\Script\UserCamera.cs" />
+    <Compile Include="Assets\script\DontDestoryGameObject.cs" />
     <Compile Include="Assets\script\EnemyManager.cs" />
     <Compile Include="Assets\script\EnemyScript\Enemy.cs" />
     <Compile Include="Assets\script\EnemyScript\barrage.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Assets\script\GameManager.cs" />
     <Compile Include="Assets\script\Player.cs" />
     <Compile Include="Assets\script\PlayerManager.cs" />
+    <Compile Include="Assets\script\SelectScene\SelectManager.cs" />
     <Compile Include="Assets\script\SelectScene\SmokeMove.cs" />
     <Compile Include="Assets\script\StartScene\ButtonSystem.cs" />
     <Compile Include="Assets\script\StartScene\SoundManager.cs" />

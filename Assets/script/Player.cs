@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField]
     private PlayerManager manager;
+   
 
     public void Update()
     {

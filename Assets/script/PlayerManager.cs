@@ -85,12 +85,20 @@ public class PlayerManager : MonoBehaviour
         UpdateUi();
     }
 
+    //관련 UI를 변수에 입력하는 함수
+    public void GetUI()
+    {
+        hpText = GameObject.Find("hpText").GetComponent<Text>();
+        abilityBarText = GameObject.Find("abilityText").GetComponent<Text>();
+    }
+
+    //UI를 갱신하는 함수
     private void UpdateUi()
     {
         hpText.text = "hp :" + hp;
         abilityBarText.text = "ability : " +Mathf.Round( abilityBar*10)*0.1;
     }
-
+    //플레이어 아래에 바닦이 있는지 확인하는 함수
     private bool RaycastHit(bool foothold = true)
     {
         RaycastHit2D hit = Physics2D.Raycast(new Vector2( player.gameObject.transform.position.x,

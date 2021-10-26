@@ -32,7 +32,7 @@ public class ButtonSystem : MonoBehaviour
         if (buttonAble == true)
         {
             ButtonSound_Play();
-            SceneManager.LoadScene("StoryScene");
+            SceneManager.LoadScene("SelectScene");
         }
     }
 

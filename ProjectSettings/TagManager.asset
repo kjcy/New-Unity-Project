@@ -9,6 +9,10 @@ TagManager:
   - barrage
   - parringbarrage
   - boss
+  - GameManager
+  - EnemyManager
+  - PlayerManager
+  - Manager
   layers:
   - Default
   - TransparentFX
