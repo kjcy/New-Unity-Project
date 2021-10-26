@@ -11,7 +11,7 @@ public class EnemyManager : MonoBehaviour
     private GameObject[] temp = new GameObject[20];
 
     public GameObject mainBoss;
-
+    private Animator BossAni;
     private float pattentime;
 
 
@@ -26,6 +26,7 @@ public class EnemyManager : MonoBehaviour
 
         mainBoss = Instantiate(gameManager.bossPripab, new Vector3(8, -2, 0), Quaternion.identity);
         mainBoss.GetComponent<boss>().enemyManager = this;
+        BossAni = mainBoss.GetComponent<Animator>();
     //    StartCoroutine(pattenCor());
         
     }
@@ -35,6 +36,16 @@ public class EnemyManager : MonoBehaviour
     {
         Patten();
     }
+
+    public void Bossaniplay(int index) {
+        switch (index)
+        {
+            //행동할 애니메이션들을 관리
+
+        }
+    
+    }
+    
 
     public void Patten()
     {
@@ -95,9 +106,9 @@ public class EnemyManager : MonoBehaviour
 
             for (int i = 0; i < 4; i++)
             {
-                temp[i] = Instantiate(barragebox[0], mainBoss.transform.position + new Vector3(5, -1.3f, 0), Quaternion.identity, barrageParent);
+                temp[i] = Instantiate(barragebox[0], mainBoss.transform.position + new Vector3(5, -1.3f, 0), Quaternion.identity, barrageParent);//보스 위치 + 5여서 뒤에서 나가는 것으로 보임
             }
-            temp[4] = Instantiate(barragebox[1], mainBoss.transform.position + new Vector3(0, -1.3f, 0), Quaternion.identity, barrageParent);
+            temp[4] = Instantiate(barragebox[1], mainBoss.transform.position + new Vector3(0, -1.3f, 0), Quaternion.identity, barrageParent);//패팅 탄은 보스위치에 소환
 
             for (int i = 0; i < 5; i++)
             {

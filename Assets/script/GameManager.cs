@@ -18,10 +18,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public GameObject bossPripab;
 
-    public Text startText;
+    public GameObject startTime;
 
     [SerializeField]
     private PlayerManager playerManager;
+
+    public Sprite reddysprite;
+    public Sprite startsprite;
 
     public PlayerManager PlayerManager
     {
@@ -41,14 +44,12 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartAni()
     {
-        for(int i = 0; i < 3; i++) {
-            startText.text =  string.Format("{0}",3-i);
-
-             yield return new WaitForSecondsRealtime(1f);
-        }
-        startText.gameObject.SetActive(false);
-        
+        startTime.GetComponent<Image>().sprite = reddysprite;
+        yield return new WaitForSecondsRealtime(3f);
+        startTime.GetComponent<Image>().sprite = startsprite;
+        yield return new WaitForSecondsRealtime(0.3f);
         play = true;
+        startTime.SetActive(false);
     }
 
     public void EnemyHpDown(Enemy enemy ,int damge)
@@ -76,6 +77,11 @@ public class GameManager : MonoBehaviour
             GameOver.Invoke();//게임오버라는 이벤트를 실행
             
         }
+    }
+
+    public void Gameclear()
+    {
+
     }
 
     public void GameEnd()

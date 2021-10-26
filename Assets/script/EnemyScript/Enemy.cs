@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
         hp -= damage;//체력 감소
         if (hp < 1)
         {
-            DestroyObject(hit);
+            DestroyObject(this.gameObject);
         }
 
     }

@@ -79,9 +79,9 @@ public class PlayerManager : MonoBehaviour
         
         PlayerParring();
         PlayerMove();
-        PlayerDown();
         ShotBullet();
         }
+        PlayerDown();
         UpdateUi();
     }
 
