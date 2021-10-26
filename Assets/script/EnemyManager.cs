@@ -35,6 +35,9 @@ public class EnemyManager : MonoBehaviour
     //지금 scene 공유를 위해 코드 변경하는중
     public void CreateBoss(int index)
     {
+        BossPattenCor = null;
+        stage2 = true;
+       
         barrageParent = GameObject.Find("BarrageParent").transform;
         mainBoss = Instantiate(gameManager.bossPripab, new Vector3(8, -2, 0), Quaternion.identity);
         mainBoss.GetComponent<boss>().enemyManager = this;
@@ -215,12 +218,20 @@ public class EnemyManager : MonoBehaviour
 
     public void BossDie()
     {
-        for(int i = 0; i < barrageParent.childCount; i++)
+        var bullet = GameObject.FindGameObjectsWithTag("barrage");
+        for(int i = 0; i < bullet.Length; i++)
         {
-            Destroy(barrageParent.GetChild(i).gameObject);
+            Destroy(bullet[i]);
         }
+        bullet = GameObject.FindGameObjectsWithTag("parringbarrage");
+        for (int i = 0; i < bullet.Length; i++)
+        {
+            Destroy(bullet[i]);
+        }
+
+
         StopCoroutine(BossPattenCor);//보스가 죽을 경우 코루틴 종료
-        gameManager.GameOver.Invoke();//게임이 끝났다는것을 알려준다.
+        gameManager.GameEndLoadScene();
     }
 
    

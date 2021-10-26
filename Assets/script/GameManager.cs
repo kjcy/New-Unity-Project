@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     //선택 신으로 이동할수 있도록 하는 함수
     public void GameEndLoadScene()
     {
+        
         SceneManager.LoadScene("SelectScene");
     }
 

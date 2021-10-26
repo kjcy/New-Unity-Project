@@ -17,9 +17,6 @@ public class boss : Enemy
         
     }
 
-    public void OnDestroy()
-    {
-        enemyManager.BossDie();
-    }
+   
 
 }

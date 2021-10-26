@@ -61,9 +61,14 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
+        resetplayer();
+    }
+
+    public void resetplayer()
+    {
         playerManager = this;
         speed = 7.5f;
-        Debug.LogFormat("{0}", speed);
+
         downPlayer = true;
         jumpPlayer = false;
         parringPlayer = false;
@@ -72,6 +77,7 @@ public class PlayerManager : MonoBehaviour
         abilityBar = 0;
         invincibility = false;
     }
+
 
     private void Update()
     {
@@ -95,8 +101,10 @@ public class PlayerManager : MonoBehaviour
     //UI를 갱신하는 함수
     private void UpdateUi()
     {
+        if (hpText) { 
         hpText.text = "hp :" + hp;
         abilityBarText.text = "ability : " +Mathf.Round( abilityBar*10)*0.1;
+        }
     }
     //플레이어 아래에 바닦이 있는지 확인하는 함수
     private bool RaycastHit(bool foothold = true)

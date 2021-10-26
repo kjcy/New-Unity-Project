@@ -23,6 +23,10 @@ public class Enemy : MonoBehaviour
         hp -= damage;//체력 감소
         if (hp < 1)
         {
+            if (this.gameObject.CompareTag("boss"))
+            {
+                GameManager.gameManager.GameOver.Invoke();
+            }
             DestroyObject(this.gameObject);
         }
 
