@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class boss : Enemy
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -12,11 +13,12 @@ public class boss : Enemy
     }
 
     // Update is called once per frame
+
+
     void Update()
     {
-        
     }
 
-   
+
 
 }
