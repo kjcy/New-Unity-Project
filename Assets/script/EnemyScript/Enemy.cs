@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     public EnemyManager enemyManager;
-
+    public GameObject abilityBoll;
     public enum type { boss, normalEnemy,barrage,paringBarrage};//순서대로 보스, 일반몬스터, 탄막, 패링탄막
 
     public type enemyType;
@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
         {
             if (this.gameObject.CompareTag("boss"))
             {
+                Instantiate(abilityBoll, enemyManager.mainBoss.transform.position,Quaternion.identity);
                 GameManager.gameManager.win = true;
                 GameManager.gameManager.GameOver.Invoke();
             }

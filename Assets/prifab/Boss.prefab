@@ -147,8 +147,8 @@ MonoBehaviour:
   enemyManager: {fileID: 0}
   enemyType: 0
   hp: 999
-  target: {fileID: 6543007937913858110, guid: 60b642cbda6d2af468ff2550b5e2a492, type: 3}
-  spawnPoint: {fileID: 5240008348010360573}
+  abilityBoll: {fileID: 6543007937913858110, guid: 60b642cbda6d2af468ff2550b5e2a492,
+    type: 3}
 --- !u!95 &5240008348010360560
 Animator:
   serializedVersion: 3
