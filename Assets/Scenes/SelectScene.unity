@@ -790,6 +790,18 @@ PrefabInstance:
       objectReference: {fileID: 1915131616}
     - target: {fileID: 775498364537604793, guid: b046b66b35baafb46a85e0e5c84576f6,
         type: 3}
+      propertyPath: reddysprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5e47cd691d4894e4e85b890a065935c1,
+        type: 3}
+    - target: {fileID: 775498364537604793, guid: b046b66b35baafb46a85e0e5c84576f6,
+        type: 3}
+      propertyPath: startsprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e0c427412e2c1744b9d2f973d8c6411d,
+        type: 3}
+    - target: {fileID: 775498364537604793, guid: b046b66b35baafb46a85e0e5c84576f6,
+        type: 3}
       propertyPath: page2Background
       value: 
       objectReference: {fileID: 21300000, guid: 235174ce61e2fb942a47d7c5fa0173b8,
