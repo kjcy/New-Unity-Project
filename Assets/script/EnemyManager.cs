@@ -234,7 +234,7 @@ public class EnemyManager : MonoBehaviour
 
 
         StopCoroutine(BossPattenCor);//보스가 죽을 경우 코루틴 종료
-        gameManager.GameEndLoadScene();
+       
     }
 
    

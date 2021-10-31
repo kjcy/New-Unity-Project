@@ -15,7 +15,7 @@ public class moveToPalyer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = Vector3.Lerp(this.transform.position, manager.Player.transform.position, 0.001f);
+        this.transform.position = Vector3.Lerp(this.transform.position, manager.Player.transform.position, 0.005f);
         
     }
 
@@ -25,6 +25,7 @@ public class moveToPalyer : MonoBehaviour
         {
             Debug.Log("어빌리티볼 충돌");
             Destroy(this.gameObject);
+            GameManager.gameManager.GameEndLoadScene();
             //여기에 어빌리티볼이랑 플레이어가 만날때 임팩트, 효과등을 작성
         }
     }

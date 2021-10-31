@@ -59,8 +59,8 @@ public class GameManager : MonoBehaviour
     //선택 신으로 이동할수 있도록 하는 함수
     public void GameEndLoadScene()
     {
-
-        StartCoroutine(LoadSelectScene());
+        SceneManager.LoadScene("SelectScene");
+        //StartCoroutine(LoadSelectScene());
     }
 
     IEnumerator LoadSelectScene()
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         }
 
 
-        yield return new WaitForSecondsRealtime(3f);
+        //yield return new WaitForSecondsRealtime(3f);
         SceneManager.LoadScene("SelectScene");
         yield return 0;
     }
@@ -123,6 +123,16 @@ public class GameManager : MonoBehaviour
     {
         if (playerManager.hpDown(1))//플레이어의 체력이 0이하가 된다면 참을 반환한다.
         {
+           GameObject temp =  GameObject.Find("Canvas").transform.GetChild(4).gameObject;//주인공이 죽었을때 select 씬으로 돌아가는 UI
+            if (!temp)
+            {
+                Debug.Log("못찾음");
+            }
+            else
+            {
+                temp.SetActive(true);//이를 활성화
+            }
+
             GameOver.Invoke();//게임오버라는 이벤트를 실행
             
         }
