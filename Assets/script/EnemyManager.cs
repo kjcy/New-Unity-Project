@@ -43,16 +43,19 @@ public class EnemyManager : MonoBehaviour
         gameManager.win = false;
 
         barrageParent = GameObject.Find("BarrageParent").transform;
-        mainBoss = Instantiate(gameManager.bossPripab, new Vector3(8, -2, 0), Quaternion.identity);
-        mainBoss.GetComponent<boss>().enemyManager = this;
-
+        if (!mainBoss) { 
         if (SceneManager.GetActiveScene().name.Equals("pro")) { //현재 씬에 따라 보스의 id를 정해주고 이를 통해 보스의 패턴 코루틴을 실행시킨다.
-                mainBoss.GetComponent<boss>().bossId = 0;
+            mainBoss = Instantiate(gameManager.bossPripab[0], new Vector3(8, -2, 0), Quaternion.identity);//신에 따라 pripab을 다르게 적용해 씬에 맞는 보스를 소환한다.
+            mainBoss.GetComponent<boss>().bossId = 0;
         }
 
-
-
-
+        if (SceneManager.GetActiveScene().name.Equals("pro 1"))
+        { //현재 씬에 따라 보스의 id를 정해주고 이를 통해 보스의 패턴 코루틴을 실행시킨다.
+            mainBoss = Instantiate(gameManager.bossPripab[1], new Vector3(8, -2, 0), Quaternion.identity);//신에 따라 pripab을 다르게 적용해 씬에 맞는 보스를 소환한다.
+            mainBoss.GetComponent<boss>().bossId = 1;
+        }
+            mainBoss.GetComponent<boss>().enemyManager = this;
+        }
 
         BossAni = mainBoss.GetComponent<Animator>();
     }
@@ -80,13 +83,17 @@ public class EnemyManager : MonoBehaviour
 
     public void Patten()
     {
-        
-        if(mainBoss.GetComponent<boss>().bossId == 0) { //보스id 가 0일때 튜토리얼 보스가 나온다.
-            if(BossPattenCor == null)//막 처음 시작할때 패턴이 없다면 1페이지 코루틴을 시작한다.
+
+        if (mainBoss.GetComponent<boss>().bossId == 0)
+        { //보스id 가 0일때 튜토리얼 보스가 나온다.
+            if (BossPattenCor == null)//막 처음 시작할때 패턴이 없다면 1페이지 코루틴을 시작한다.
             {
                 BossPattenCor = PattenStage1Cor();
                 StartCoroutine(BossPattenCor);
             }
+        }else if(mainBoss.GetComponent<boss>().bossId == 1)
+        {
+
         }
     }
 
@@ -116,7 +123,7 @@ public class EnemyManager : MonoBehaviour
 
 
 
-    //1페이즈 코루틴
+    //1번째 보스 패턴 코루틴
     IEnumerator PattenStage1Cor()
     {
         do
@@ -223,9 +230,10 @@ public class EnemyManager : MonoBehaviour
             Destroy(bullet[i]);
         }
 
+      
 
         StopCoroutine(BossPattenCor);//보스가 죽을 경우 코루틴 종료
-       
+        Destroy(mainBoss);//신을 이동하더라고 보스가 안사라지는 것을 방지
     }
 
    

@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         get { return enemyManager; }
     }
     [SerializeField]
-    public GameObject bossPripab;
+    public GameObject[] bossPripab;
 
     public GameObject startTime;
 
