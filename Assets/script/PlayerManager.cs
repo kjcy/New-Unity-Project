@@ -343,7 +343,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (!invincibility) {//무적이 아닐때 
              hp -= damage;
-            InvincibilityActive(1.5f);
+            InvincibilityActive(0.7f);
             if (hp < 1)
             {
                 return true;
