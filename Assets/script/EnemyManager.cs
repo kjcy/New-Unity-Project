@@ -43,7 +43,7 @@ public class EnemyManager : MonoBehaviour
         gameManager.win = false;
 
         barrageParent = GameObject.Find("BarrageParent").transform;
-
+        if (!mainBoss) { 
         if (SceneManager.GetActiveScene().name.Equals("pro")) { //현재 씬에 따라 보스의 id를 정해주고 이를 통해 보스의 패턴 코루틴을 실행시킨다.
             mainBoss = Instantiate(gameManager.bossPripab[0], new Vector3(8, -2, 0), Quaternion.identity);//신에 따라 pripab을 다르게 적용해 씬에 맞는 보스를 소환한다.
             mainBoss.GetComponent<boss>().bossId = 0;
@@ -54,10 +54,8 @@ public class EnemyManager : MonoBehaviour
             mainBoss = Instantiate(gameManager.bossPripab[1], new Vector3(8, -2, 0), Quaternion.identity);//신에 따라 pripab을 다르게 적용해 씬에 맞는 보스를 소환한다.
             mainBoss.GetComponent<boss>().bossId = 1;
         }
-
-        mainBoss.GetComponent<boss>().enemyManager = this;
-
-
+            mainBoss.GetComponent<boss>().enemyManager = this;
+        }
 
         BossAni = mainBoss.GetComponent<Animator>();
     }
@@ -232,9 +230,10 @@ public class EnemyManager : MonoBehaviour
             Destroy(bullet[i]);
         }
 
+      
 
         StopCoroutine(BossPattenCor);//보스가 죽을 경우 코루틴 종료
-       
+        Destroy(mainBoss);//신을 이동하더라고 보스가 안사라지는 것을 방지
     }
 
    
