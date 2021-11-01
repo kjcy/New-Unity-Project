@@ -1,0 +1,146 @@
+
+주인공캐릭 작업중 (1).png
+size: 275,204
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+가슴
+  rotate: false
+  xy: 2, 67
+  size: 49, 47
+  orig: 49, 49
+  offset: 0, 2
+  index: -1
+공격상태 머리
+  rotate: false
+  xy: 124, 134
+  size: 72, 68
+  orig: 72, 68
+  offset: 0, 0
+  index: -1
+기본상태 머리
+  rotate: false
+  xy: 198, 134
+  size: 72, 68
+  orig: 72, 68
+  offset: 0, 0
+  index: -1
+망토
+  rotate: false
+  xy: 2, 116
+  size: 120, 86
+  orig: 120, 86
+  offset: 0, 0
+  index: -1
+배
+  rotate: false
+  xy: 2, 5
+  size: 43, 30
+  orig: 43, 31
+  offset: 0, 1
+  index: -1
+배지
+  rotate: false
+  xy: 236, 30
+  size: 37, 32
+  orig: 37, 32
+  offset: 0, 0
+  index: -1
+오른다리
+  rotate: true
+  xy: 53, 86
+  size: 28, 48
+  orig: 28, 48
+  offset: 0, 0
+  index: -1
+오른바지
+  rotate: true
+  xy: 102, 29
+  size: 33, 45
+  orig: 33, 45
+  offset: 0, 0
+  index: -1
+오른발
+  rotate: true
+  xy: 149, 2
+  size: 30, 40
+  orig: 30, 43
+  offset: 0, 1
+  index: -1
+오른손
+  rotate: false
+  xy: 123, 5
+  size: 24, 22
+  orig: 26, 23
+  offset: 1, 0
+  index: -1
+오른팔 보호대
+  rotate: true
+  xy: 191, 2
+  size: 24, 32
+  orig: 24, 34
+  offset: 0, 1
+  index: -1
+오른팔뚝
+  rotate: true
+  xy: 51, 19
+  size: 31, 44
+  orig: 31, 45
+  offset: 0, 0
+  index: -1
+왼다리
+  rotate: true
+  xy: 53, 52
+  size: 32, 47
+  orig: 32, 47
+  offset: 0, 0
+  index: -1
+왼바지
+  rotate: true
+  xy: 149, 34
+  size: 28, 43
+  orig: 28, 43
+  offset: 0, 0
+  index: -1
+왼발
+  rotate: true
+  xy: 2, 37
+  size: 28, 47
+  orig: 29, 49
+  offset: 1, 0
+  index: -1
+왼손
+  rotate: false
+  xy: 97, 3
+  size: 24, 24
+  orig: 26, 25
+  offset: 1, 1
+  index: -1
+왼팔
+  rotate: true
+  xy: 194, 28
+  size: 34, 40
+  orig: 35, 40
+  offset: 0, 0
+  index: -1
+왼팔 보호대
+  rotate: true
+  xy: 236, 2
+  size: 26, 33
+  orig: 27, 40
+  offset: 1, 0
+  index: -1
+죽은상태 머리
+  rotate: false
+  xy: 124, 64
+  size: 72, 68
+  orig: 72, 68
+  offset: 0, 0
+  index: -1
+피격 머리
+  rotate: false
+  xy: 198, 64
+  size: 72, 68
+  orig: 72, 68
+  offset: 0, 0
+  index: -1
