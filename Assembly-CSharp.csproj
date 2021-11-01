@@ -72,6 +72,7 @@
     <Compile Include="Assets\script\StoryManager.cs" />
     <Compile Include="Assets\script\bullet.cs" />
     <Compile Include="Assets\script\button.cs" />
+    <Compile Include="Assets\script\foothold.cs" />
     <Compile Include="Assets\script\moveToPalyer.cs" />
   </ItemGroup>
   <ItemGroup>

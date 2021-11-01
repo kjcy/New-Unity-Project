@@ -141,27 +141,36 @@ public class EnemyManager : MonoBehaviour
                 temp[4].GetComponent<Enemy>().MoveEnemy(mainBoss.transform.position + new Vector3(-20, -1.3f, 0), 100f);
          
                 yield return new WaitForSecondsRealtime(3f);//3초 뒤에 다음 패턴
-           
+
+                temp[3] = Instantiate(foothold, new Vector3(3, 5, 0), Quaternion.identity);//발판 생성후 이동
+                temp[4] = Instantiate(foothold, new Vector3(-5, 5, 0), Quaternion.identity);//발판 생성후 이동
+                temp[3].GetComponent<Enemy>().MoveEnemy(new Vector3(3, -1.5f, 0), 70f);
+                temp[4].GetComponent<Enemy>().MoveEnemy(new Vector3(-5, -1.5f, 0), 70f);
+                yield return new WaitForSecondsRealtime(0.7f);//이동에 여유를 주는 시간
                 for(int i = 0; i < 3; i++) // 엇갈리는 패턴 
                 { 
                 temp[0] = Instantiate(barragebox[i%2], new Vector3(7,0,0), Quaternion.identity, barrageParent);
                 temp[1] = Instantiate(barragebox[(i+1)%2], new Vector3(7, 0, 0), Quaternion.identity, barrageParent);
 
-                temp[0].GetComponent<Enemy>().Uturn(new Vector3(-20, 3, 0), 250f, 3f);
-                temp[1].GetComponent<Enemy>().Uturn(new Vector3(-20, -3, 0), 250f, -3f);
+                temp[0].GetComponent<Enemy>().Uturn(new Vector3(-13, 3, 0), 200f, 1.7f);
+                temp[1].GetComponent<Enemy>().Uturn(new Vector3(-13, -3, 0), 200f, 1.7f);
 
                     yield return new WaitForSecondsRealtime(1f);//1초 뒤에 다음 패턴
                 }
-
+                yield return new WaitForSecondsRealtime(2f);
+                for (int i = 3; i <= 4; i++) { 
+                temp[i].GetComponent<Enemy>().MoveEnemy(new Vector3(0, -6, 0), 50f);//발판의 이용이 끝남으로 아래로
+                }
                 yield return new WaitForSecondsRealtime(2f);//2초 뒤에 다음 패턴
-         
+                Destroy(temp[3]);//발판 삭제
+                Destroy(temp[4]);//발판 삭제
                 for (int i = 0; i < 3; i++)  // 직선 나오는 패턴 + 통통 튀는 탄환 패턴 
                 {
                     temp[0] = Instantiate(barragebox[i % 2], new Vector3(7,-3, 0), Quaternion.identity, barrageParent);
                     temp[1] = Instantiate(barragebox[(i + 1) % 2], new Vector3(7, -3, 0), Quaternion.identity, barrageParent);
 
-                    temp[0].GetComponent<Enemy>().Uturn(new Vector3(-20, 3, 0), 250f, 3f);
-                    temp[1].GetComponent<Enemy>().Uturn(new Vector3(-20, -3, 0), 250f, -3f);
+                    temp[0].GetComponent<Enemy>().Uturn(new Vector3(-20, 3, 0), 250f, 1);
+                    temp[1].GetComponent<Enemy>().Uturn(new Vector3(-20, -3, 0), 250f, 1);
 
                
                 }  
