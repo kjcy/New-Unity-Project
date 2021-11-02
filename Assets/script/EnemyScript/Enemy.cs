@@ -123,11 +123,7 @@ public class Enemy : MonoBehaviour
       
         for(int i = 0; i <= time; i++)
         {
-
-
-            
-            this.gameObject.transform.position = new Vector3(Mathf.Lerp(startPoint.x, endPoint.x, i / time)
-                , startPoint.y + (endPoint.y-startPoint.y)* Mathf.Sin(i*Time.deltaTime)//y시작위치에서 moveRound 까지 왕복한다.
+            this.gameObject.transform.position = new Vector3(Mathf.Lerp(startPoint.x, endPoint.x, i / time)//y시작위치에서 moveRound 까지 왕복한다.
                 , startPoint.y + (endPoint.y-startPoint.y)* Mathf.Sin(i*moveRound*Time.deltaTime)//y시작위치에서 moveRound 까지 왕복한다.
                 , 0);
 

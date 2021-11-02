@@ -91,6 +91,12 @@ public class EnemyManager : MonoBehaviour
                 BossPattenCor = PattenStage1Cor();
                 StartCoroutine(BossPattenCor);
             }
+
+            if (stage2 && mainBoss.GetComponent<boss>().hp < 300)
+            {
+                stage2 = false;
+                StartCoroutine(page2Start());
+            }
         }else if(mainBoss.GetComponent<boss>().bossId == 1)
         {
 
@@ -129,6 +135,7 @@ public class EnemyManager : MonoBehaviour
         do
         {
             if (!gameManager.battle) continue;//전투 상태가 아닐때는 패턴을 멈춘다.(ex 일시정지, 2페이즈 진입상태등)
+
             if (mainBoss.GetComponent<Enemy>().hp > 300) {//1페이즈 
                 for (int i = 0; i < 4; i++) //직선 패턴 
                 {
@@ -178,6 +185,8 @@ public class EnemyManager : MonoBehaviour
             }
             else//2페이즈
             {
+                
+
                 for(int i = 0; i < 3; i++) // 유도 탄환 패턴 
                 {
                     temp[i] = Instantiate(barragebox[0], new Vector3(-5 + i * 3, 5, 0), Quaternion.identity, barrageParent);
@@ -198,8 +207,8 @@ public class EnemyManager : MonoBehaviour
                     temp[0] = Instantiate(barragebox[i % 2], new Vector3(10, -3, 0), Quaternion.identity, barrageParent);
                     temp[1] = Instantiate(barragebox[(i + 1) % 2], new Vector3(20, -3, 0), Quaternion.identity, barrageParent);
 
-                    temp[0].GetComponent<Enemy>().Uturn(new Vector3(-25, -2, 0), 250f, 3f);
-                    temp[1].GetComponent<Enemy>().Uturn(new Vector3(-20, -3, 0), 250f, -3f);
+                    temp[0].GetComponent<Enemy>().Uturn(new Vector3(-25, -2, 0), 250f, 1f);
+                    temp[1].GetComponent<Enemy>().Uturn(new Vector3(-20, -3, 0), 250f, 1f);
 
 
                     yield return new WaitForSecondsRealtime(1f);
