@@ -193,14 +193,14 @@ public class EnemyManager : MonoBehaviour
                 for(int i = 0; i < 3; i++) // 유도 탄환 패턴 
                 {
                     temp[i] = Instantiate(barragebox[0], new Vector3(-5 + i * 3, 5, 0), Quaternion.identity, barrageParent);
-                    temp[i].GetComponent<Enemy>().MoveEnemy(temp[i].transform.position + new Vector3(0, -3, 0), 150f);
+                    temp[i].GetComponent<Enemy>().MoveEnemy(temp[i].transform.position + new Vector3(0, -3, 0), 100f);
                 }
                 yield return new WaitForSecondsRealtime(2f);
 
                 for (int i = 0; i < 3; i++)
                 {
                     if (temp[i] == false) continue;
-                    temp[i].GetComponent<Enemy>().reflex(gameManager.PlayerManager.Player.transform.position, 50f);
+                    temp[i].GetComponent<Enemy>().reflex(gameManager.PlayerManager.Player.transform.position + new Vector3(0,0.5f,0), 30f);
 
                     yield return new WaitForSecondsRealtime(0.77f);
                 }
