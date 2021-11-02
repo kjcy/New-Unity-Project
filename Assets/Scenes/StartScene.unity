@@ -308,9 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85157b5b97fc6b04cb51e8d42409b589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainSound:
-  - {fileID: 8300000, guid: db267ce139084f74d87a0f98f7587c3e, type: 3}
-  - {fileID: 8300000, guid: c78ef336eab6ba24f98a0d7ae1907b0c, type: 3}
+  StartBgm: {fileID: 0}
 --- !u!4 &592632684
 Transform:
   m_ObjectHideFlags: 0
