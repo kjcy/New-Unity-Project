@@ -20,7 +20,6 @@ public class SelectManager : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("포탈과 충돌중!!!");
             if (Input.GetKeyDown(KeyCode.W))
             {
                 SceneManager.LoadScene(this.gameObject.name);//포탈의 이름을 씬의 이름으로해서 이름에 맞는 신으로 이동할 수 있도록

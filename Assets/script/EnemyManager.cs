@@ -93,9 +93,11 @@ public class EnemyManager : MonoBehaviour
                 StartCoroutine(BossPattenCor);
             }
 
-            if (stage2 && mainBoss.GetComponent<boss>().hp < 300)
+            if (stage2 && mainBoss.GetComponent<boss>().hp < 250)
             {
+                Clearbullet();
                 stage2 = false;
+                StopCoroutine(BossPattenCor);
                 StartCoroutine(page2Start());
             }
         }else if(mainBoss.GetComponent<boss>().bossId == 1)
@@ -124,7 +126,7 @@ public class EnemyManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(0.5f);
         gameManager.battle = true;
-
+        BossPattenCor = null;
         yield return null;
     }
 
@@ -137,7 +139,7 @@ public class EnemyManager : MonoBehaviour
         {
             if (!gameManager.battle) continue;//전투 상태가 아닐때는 패턴을 멈춘다.(ex 일시정지, 2페이즈 진입상태등)
 
-            if (mainBoss.GetComponent<Enemy>().hp > 300) {//1페이즈 
+            if (mainBoss.GetComponent<Enemy>().hp > 250) {//1페이즈 
                 for (int i = 0; i < 4; i++) //직선 패턴 
                 {
                     temp[i] = Instantiate(barragebox[0], mainBoss.transform.position + new Vector3(0,-1.3f,0), Quaternion.identity, barrageParent);
@@ -174,7 +176,7 @@ public class EnemyManager : MonoBehaviour
                 Destroy(temp[4]);//발판 삭제
                 for (int i = 0; i < 3; i++)  // 직선 나오는 패턴 + 통통 튀는 탄환 패턴 
                 {
-                    temp[0] = Instantiate(barragebox[0], new Vector3(7,-2, 0), Quaternion.identity, barrageParent);
+                    temp[0] = Instantiate(barragebox[0], new Vector3(7,-1.7f, 0), Quaternion.identity, barrageParent);
                     temp[1] = Instantiate(barragebox[1], new Vector3(7, -2, 0), Quaternion.identity, barrageParent);
 
                     temp[0].GetComponent<Enemy>().Uturn(new Vector3(-20, 0, 0), 250f, 3);
@@ -194,15 +196,21 @@ public class EnemyManager : MonoBehaviour
                     temp[i].GetComponent<Enemy>().MoveEnemy(temp[i].transform.position + new Vector3(0, -3, 0), 150f);
                 }
                 yield return new WaitForSecondsRealtime(2f);
-            
-                for(int i = 0; i < 3; i++)
+
+                for (int i = 0; i < 3; i++)
                 {
                     if (temp[i] == false) continue;
                     temp[i].GetComponent<Enemy>().reflex(gameManager.PlayerManager.Player.transform.position, 50f);
 
                     yield return new WaitForSecondsRealtime(0.77f);
-                    Destroy(temp[i]);
                 }
+
+                for(int i = 0; i < 3; i++)
+                {
+                    if (temp[i] == false) continue;
+                    temp[i].GetComponent<Enemy>().MoveEnemy(new Vector3(-10, temp[i].transform.position.y, 0), 100f);
+                }
+                yield return new WaitForSecondsRealtime(0.5f);
                 for (int i = 0; i < 3; i++) // 2개 겹쳐서 나오는 패턴 점프해서 피하는 패턴 
                 {
                     temp[0] = Instantiate(barragebox[i % 2], new Vector3(10, -3, 0), Quaternion.identity, barrageParent);
@@ -220,26 +228,23 @@ public class EnemyManager : MonoBehaviour
                     temp[0] = Instantiate(barragebox[i % 2], new Vector3(7, -3, 0), Quaternion.identity, barrageParent);
                     temp[1] = Instantiate(barragebox[(i + 1) % 2], new Vector3(7, -3, 0), Quaternion.identity, barrageParent);
 
-                    temp[0].GetComponent<Enemy>().Uturn(new Vector3(-20, 3, 0), 250f, 3f);
-                    temp[1].GetComponent<Enemy>().Uturn(new Vector3(-20, -3, 0), 250f, -3f);
-
-
+                    temp[0].GetComponent<Enemy>().Uturn(new Vector3(-20, 3, 0), 250f, 1f);
+                    temp[1].GetComponent<Enemy>().MoveEnemy(new Vector3(-20, -3, 0), 250);
+                    yield return new WaitForSecondsRealtime(1.45f);
                 }
 
 
-                yield return new WaitForSecondsRealtime(5f);
+                yield return new WaitForSecondsRealtime(2f);
             }
         } while (true);
 
     }
      
     
-
-
-    public void BossDie()
+    public void Clearbullet()
     {
         var bullet = GameObject.FindGameObjectsWithTag("barrage");
-        for(int i = 0; i < bullet.Length; i++)
+        for (int i = 0; i < bullet.Length; i++)
         {
             Destroy(bullet[i]);
         }
@@ -249,8 +254,12 @@ public class EnemyManager : MonoBehaviour
             Destroy(bullet[i]);
         }
 
-      
+    }
 
+    public void BossDie()
+    {
+
+        Clearbullet();
         StopCoroutine(BossPattenCor);//보스가 죽을 경우 코루틴 종료
         Destroy(mainBoss);//신을 이동하더라고 보스가 안사라지는 것을 방지
     }

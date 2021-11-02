@@ -32,7 +32,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     [SerializeField]
-    private GameObject bullet;
+    private GameObject[] bullet;
 
     [SerializeField]
     private Sprite[] playerSprite = new Sprite[2];
@@ -273,9 +273,9 @@ public class PlayerManager : MonoBehaviour
         if (inputbullet&&attackTime<0)
         {
             attackTime = 0.35f;
-            GameObject bullettemp = Instantiate(bullet, player.transform.GetChild(0).position, v);
+            GameObject bullettemp = Instantiate(bullet[0], player.transform.GetChild(0).position, v);
             bullettemp.GetComponent<bullet>().manager = this;
-            bullettemp.GetComponent<bullet>().damge = 5;
+            bullettemp.GetComponent<bullet>().damge = 3;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -384,9 +384,9 @@ public class PlayerManager : MonoBehaviour
         Quaternion v = player.transform.GetChild(0).rotation;
         for(int i = 0; i < abilityBar* 5; i++)
         {
-            GameObject bullettemp = Instantiate(bullet, player.transform.GetChild(0).position, v);
+            GameObject bullettemp = Instantiate(bullet[1], player.transform.GetChild(0).position, v);
             bullettemp.GetComponent<bullet>().manager = this;
-            bullettemp.GetComponent<bullet>().damge = 3;
+            bullettemp.GetComponent<bullet>().damge = 2;
             yield return new WaitForSecondsRealtime(0.09f);
         }
 
