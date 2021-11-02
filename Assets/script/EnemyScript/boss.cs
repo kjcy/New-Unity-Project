@@ -13,8 +13,15 @@ public class boss : Enemy
     void Start()
     {
         enemyType = type.boss;
-        hp = 500;
-    }
+        switch (bossId) {
+            case 0:
+            hp = 500;
+                break;
+            case 1:
+                hp = 700;
+                break;
+        }
+}
 
     // Update is called once per frame
 

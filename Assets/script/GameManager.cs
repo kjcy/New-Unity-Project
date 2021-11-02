@@ -42,12 +42,14 @@ public class GameManager : MonoBehaviour
     //플레이어의 조종 여부
     public bool play;
 
+    public bool[] portal = new bool[2];
 
     //전투의 작동 여부
     public bool battle;
     // Start is called before the first frame update
     void Start()
     {
+        portal[0] = true;
         play = true;
         gameManager = this;
         playerManager.gameManager = this;
@@ -55,18 +57,53 @@ public class GameManager : MonoBehaviour
         //StartCoroutine(StartAni());
     }
 
+    private void Update()
+    {
+        ActivePortal();
+    }
+
+    public void ActivePortal()
+    {
+        if(SceneManager.GetActiveScene().name == "SelectScene")
+            for(int i = 0; i < portal.Length; i++)
+            {
+                GameObject.Find("portal").transform.GetChild(i).gameObject.SetActive(portal[i]);
+            }
+    }
+
 
     //선택 신으로 이동할수 있도록 하는 함수
     public void GameEndLoadScene()
     {
+
+        if (win)
+        {
+            Debug.Log("승리");
+            OnClearPortal();
+            //승리했다는 코드
+        }
+        else
+        {
+            //패배했다는 코드
+        }
         SceneManager.LoadScene("SelectScene");
         //StartCoroutine(LoadSelectScene());
     }
+    public void OnClearPortal()
+    {
+        string name = SceneManager.GetActiveScene().name;
 
+        if (name.Equals("pro"))
+        {
+            portal[1] = true;
+        }
+
+    }
     IEnumerator LoadSelectScene()
     {
         if (win)
         {
+            Debug.Log("승리");
             //승리했다는 코드
         }
         else
