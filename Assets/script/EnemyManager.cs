@@ -102,7 +102,7 @@ public class EnemyManager : MonoBehaviour
             }
         }else if(mainBoss.GetComponent<boss>().bossId == 1)
         {
-
+          
         }
     }
 
@@ -239,8 +239,8 @@ public class EnemyManager : MonoBehaviour
         } while (true);
 
     }
-     
-    
+ 
+
     public void Clearbullet()
     {
         var bullet = GameObject.FindGameObjectsWithTag("barrage");
