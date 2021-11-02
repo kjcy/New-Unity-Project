@@ -1016,6 +1016,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 775498365072062260, guid: b046b66b35baafb46a85e0e5c84576f6,
         type: 3}
+      propertyPath: barragebox.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 775498365072062260, guid: b046b66b35baafb46a85e0e5c84576f6,
+        type: 3}
       propertyPath: CreateBossEvent.m_PersistentCalls.m_Calls.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1592,12 +1597,12 @@ PrefabInstance:
     - target: {fileID: 2865589489406746063, guid: 071a9b0e41f79914d9c7f902215265ad,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.43
+      value: -6.47
       objectReference: {fileID: 0}
     - target: {fileID: 2865589489406746063, guid: 071a9b0e41f79914d9c7f902215265ad,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.24
+      value: -0.83
       objectReference: {fileID: 0}
     - target: {fileID: 2865589489406746063, guid: 071a9b0e41f79914d9c7f902215265ad,
         type: 3}

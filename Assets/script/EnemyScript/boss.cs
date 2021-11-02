@@ -7,6 +7,8 @@ public class boss : Enemy
 
     public int bossId;
 
+    public GameObject[] bulletBox;
+
     // Start is called before the first frame update
     void Start()
     {

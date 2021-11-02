@@ -21,7 +21,7 @@ public class EnemyManager : MonoBehaviour
 
 
     [SerializeField]
-    private GameObject[] barragebox = new GameObject[5];
+    private GameObject[] barragebox;
 
     private IEnumerator BossPattenCor = null;
     private bool stage2 = true;
@@ -58,6 +58,7 @@ public class EnemyManager : MonoBehaviour
         }
 
         BossAni = mainBoss.GetComponent<Animator>();
+        barragebox = mainBoss.GetComponent<boss>().bulletBox;
     }
 
 
@@ -159,8 +160,8 @@ public class EnemyManager : MonoBehaviour
                 temp[0] = Instantiate(barragebox[i%2], new Vector3(7,0,0), Quaternion.identity, barrageParent);
                 temp[1] = Instantiate(barragebox[(i+1)%2], new Vector3(7, 0, 0), Quaternion.identity, barrageParent);
 
-                temp[0].GetComponent<Enemy>().Uturn(new Vector3(-13, 3, 0), 200f, 1.7f);
-                temp[1].GetComponent<Enemy>().Uturn(new Vector3(-13, -3, 0), 200f, 1.7f);
+                temp[0].GetComponent<Enemy>().Uturn(new Vector3(-10, 3, 0), 200f, 1.6f);
+                temp[1].GetComponent<Enemy>().Uturn(new Vector3(-10, -3, 0), 200f, 1.6f);
 
                     yield return new WaitForSecondsRealtime(1f);//1초 뒤에 다음 패턴
                 }
@@ -173,13 +174,13 @@ public class EnemyManager : MonoBehaviour
                 Destroy(temp[4]);//발판 삭제
                 for (int i = 0; i < 3; i++)  // 직선 나오는 패턴 + 통통 튀는 탄환 패턴 
                 {
-                    temp[0] = Instantiate(barragebox[i % 2], new Vector3(7,-3, 0), Quaternion.identity, barrageParent);
-                    temp[1] = Instantiate(barragebox[(i + 1) % 2], new Vector3(7, -3, 0), Quaternion.identity, barrageParent);
+                    temp[0] = Instantiate(barragebox[0], new Vector3(7,-2, 0), Quaternion.identity, barrageParent);
+                    temp[1] = Instantiate(barragebox[1], new Vector3(7, -2, 0), Quaternion.identity, barrageParent);
 
-                    temp[0].GetComponent<Enemy>().Uturn(new Vector3(-20, 3, 0), 250f, 1);
-                    temp[1].GetComponent<Enemy>().Uturn(new Vector3(-20, -3, 0), 250f, 1);
+                    temp[0].GetComponent<Enemy>().Uturn(new Vector3(-20, 0, 0), 250f, 3);
+                    temp[1].GetComponent<Enemy>().MoveEnemy(new Vector3(-20, -2, 0), 250);
 
-               
+                    yield return new WaitForSecondsRealtime(1.45f);
                 }  
                 yield return new WaitForSecondsRealtime(1f); //1초 뒤에 다음 패턴
             }

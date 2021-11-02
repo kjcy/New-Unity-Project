@@ -145,10 +145,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 0}
-  enemyType: 0
-  hp: 999
   abilityBoll: {fileID: 6543007937913858110, guid: 60b642cbda6d2af468ff2550b5e2a492,
     type: 3}
+  enemyType: 0
+  hp: 999
+  bossId: 0
+  bulletBox:
+  - {fileID: 8627262600131319133, guid: 06fb1b1ba0e71714daad45eb4a176075, type: 3}
+  - {fileID: 5689897862020435811, guid: 89995b1fd1843694098a605274e948d1, type: 3}
 --- !u!95 &5240008348010360560
 Animator:
   serializedVersion: 3
