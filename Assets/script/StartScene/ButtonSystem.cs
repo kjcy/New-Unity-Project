@@ -10,7 +10,7 @@ public class ButtonSystem : MonoBehaviour
     [SerializeField]
     AudioClip[] buttonSound;
 
-    int ButtonTime = 0;
+    float ButtonTime = 0;
 
     AudioSource bsSource;
 
@@ -31,21 +31,32 @@ public class ButtonSystem : MonoBehaviour
     {
         if (buttonAble == true)
         {
-            ButtonSound_Play();
-            SceneManager.LoadScene("SelectScene");
+            StartCoroutine(SceneLoad());
         }
     }
 
-    public void QuitGame()
+    IEnumerator SceneLoad()
     {
         ButtonSound_Play();
-        if (buttonAble == true)
-        {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene("SelectScene");
+    }
+    IEnumerator SceneClose()
+    {
+        ButtonSound_Play();
+        yield return new WaitForSeconds(3f);
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit(); 
 #endif
+
+    }
+    public void QuitGame()
+    {
+        if (buttonAble == true)
+        {
+            StartCoroutine(SceneClose());
         }
     }
 

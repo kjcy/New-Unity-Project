@@ -15,6 +15,10 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         this.soundSource = GetComponent<AudioSource>();
+        soundSource.clip = StartBgm;
+        soundSource.Play();
+        soundSource.loop = true;
+        bgmusicCheck = true;
     }
 
 
@@ -23,9 +27,5 @@ public class SoundManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        soundSource.clip = StartBgm;
-        soundSource.Play();
-        soundSource.loop = true;
-        bgmusicCheck = true;
     }
 }

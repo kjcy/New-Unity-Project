@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85157b5b97fc6b04cb51e8d42409b589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartBgm: {fileID: 0}
+  StartBgm: {fileID: 8300000, guid: 0133b0bffe3504146b21d80db16f5723, type: 3}
 --- !u!4 &592632684
 Transform:
   m_ObjectHideFlags: 0
@@ -642,7 +642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonSound:
-  - {fileID: 8300000, guid: 9093ab771d653a749a4793e802583cc4, type: 3}
+  - {fileID: 8300000, guid: fa2c24eab7acd424abcfd85b14536a59, type: 3}
 --- !u!82 &897035228
 AudioSource:
   m_ObjectHideFlags: 0
@@ -896,7 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonSound:
-  - {fileID: 8300000, guid: 9093ab771d653a749a4793e802583cc4, type: 3}
+  - {fileID: 8300000, guid: fa2c24eab7acd424abcfd85b14536a59, type: 3}
 --- !u!82 &1200054335
 AudioSource:
   m_ObjectHideFlags: 0
