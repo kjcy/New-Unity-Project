@@ -26,14 +26,12 @@ public class SpriteManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SoundManager.crowCheck == true)
-        {
+
             if (this.gameObject.name.Contains("Logo"))
             {
                 SpritePlus();
             }
 
-        }
 
         if(SoundManager.bgmusicCheck==true)
         {
